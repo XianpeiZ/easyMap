@@ -190,7 +190,19 @@ export default {
         resource: '',
         desc: ''
       },
-      formLabelWidth: '120px'
+      editDialogFormVisible: false,
+      editForm: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth: '80px',
+      comments: []
     }
   },
   mounted () {
@@ -374,7 +386,16 @@ export default {
       var newItem = {'x': x, 'y': y, 'w': 1, 'h': 3, 'i': i}
       this.layout1.push(newItem)
       this.historyLayout1.push(newItem)
+    },
+
+    addComments: function () {
+      this.comments.push({
+        name: this.editForm.name
+      });
+      console.log(this.editForm.name);
+      this.editForm.name = ''
     }
+
   },
   // moveEvent: function (i, newX, newY) {
   //   // this.curBox = i
