@@ -65,7 +65,9 @@ export default {
         desc: ''
       },
       formLabelWidth: '80px',
-      comments: []
+      comments: [],
+      // 初始颜色为空
+      colorChange: null
     }
   },
   mounted () {
