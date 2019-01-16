@@ -19,7 +19,7 @@ export default {
         // {'x': 3, 'y': 3, 'w': 1, 'h': 3, 'i': 7, 'flag': false, 'type': 'card'}
         // {'x': 0, 'y': 6, 'w': 100, 'h': 1, 'i': 0, 'flag': false, 'type': 'release'}
         // {"x":2,"y":6,"w":2,"h":6,"i":"4"},
-        // {"x":4,"y":6,"w":2,"h":6,"i":"5"},
+        // {"x":4,"y":6,"w":2,"h":6,"i":"5"},黄色：#FAE75C,蓝色：#AED9E9,粉色:#FE8A8B
       ],
       historyLayout1: [
         // {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false},
@@ -65,9 +65,9 @@ export default {
         desc: ''
       },
       formLabelWidth: '80px',
-      comments: [],
-      // 初始颜色为空
-      colorChange: null
+      colorPick: '#ffffff',
+      comments: []
+
     }
   },
   mounted () {
@@ -104,7 +104,7 @@ export default {
 
     // ————————————————————————————————————————————————————————————————————————————————
     // MAP的增删改查
-    newMap :function (newMapname, newMapDesc) {
+    newMap: function (newMapname, newMapDesc) {
       this.saveMap()
       this.map.name = newMapname
       this.map.desc = newMapDesc
@@ -117,9 +117,8 @@ export default {
     saveMap () {
       this.$message('save')
     },
-    
 
-    deleteMap :function () {
+    deleteMap: function () {
       this.$confirm('此操作将永久删除该MAP, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -139,7 +138,7 @@ export default {
         })
       })
     },
-    
+
     // ——————————————————————————————————————————————————————————————————————————
     // 这里是对card Item 的增删改查
     deleteItem: function (index) {
@@ -147,7 +146,7 @@ export default {
       this.layout1.splice(index, 1)
       // this.historyLayout1.splice(index, 1)
     },
-    
+
     judgeItemPosition: function (newX, newY) {
       // eslint-disable-next-line camelcase
       console.log(this.historyLayout1)
@@ -165,7 +164,7 @@ export default {
       // console.log('true')
       return 'true'
     },
-    
+
     // watchitem 只要moveEvent 函数一调用就更新整个gridlayout
     watchitem (item) {
       // console.log(this.watch_num)
@@ -197,9 +196,18 @@ export default {
     addComments: function () {
       this.comments.push({
         name: this.editForm.name
-      });
-      console.log(this.editForm.name);
+      })
+      console.log(this.editForm.name)
       this.editForm.name = ''
+    },
+    editColorPick1: function () {
+      this.colorPick = '#FE8A8B'
+    },
+    editColorPick2: function () {
+      this.colorPick = '#FAE75C'
+    },
+    editColorPick3: function () {
+      this.colorPick = '#AED9E9'
     },
     toChangePosition: function (i) {
       let layout = this.layout1
@@ -246,7 +254,7 @@ export default {
         }
       }
     },
-    
+
     rowAddItem: function (index) {
       console.log(this.layout1)
       // 如果是第一行
@@ -300,8 +308,7 @@ export default {
       this.historyLayout1.push(newItem)
     }
   },
-    
-    
+
   // ————————————————————————————————————————————————————
   // 这里可以是一些控制函数
   handleCommand (param) {

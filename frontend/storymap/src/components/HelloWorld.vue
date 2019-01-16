@@ -57,9 +57,9 @@
                      @move="moveEvent"
                      @moved="movedEvent"
                      class="griditem"
-                     :style="{background:colorChange}"
+                     :style="{background:colorPick}"
           >
-            <el-row class="drag-title" :style="{background:colorChange}">
+            <el-row class="drag-title" :style="{background:colorPick}">
               <el-col :span="14">card:{{item.i}}</el-col>
               <el-col :span="6" class="ico">
                 <!-- <el-dropdown   @command="handleCommand"> -->
@@ -86,11 +86,17 @@
               <!--</el-col>-->
             </el-row>
           </grid-item>
-          <!--编辑备注信息-->
+          <!--编辑备注卡片信息-->
           <span class="editdialog">
                 <el-dialog title="card" :visible.sync="editDialogFormVisible ">
-                  <div class="colorPick">
-                    <el-color-picker v-model="colorChange" size="midium"></el-color-picker>
+                  <div class="colorPick1">
+                    <el-button  @click.native="editColorPick1" size="small" :style="{background:'#FE8A8B'}"  circle> </el-button>
+                  </div>
+                  <div class="colorPick2">
+                    <el-button  @click.native="editColorPick2" size="small" :style="{background:'#FAE75C'}"  circle> </el-button>
+                  </div>
+                  <div class="colorPick3">
+                    <el-button  @click.native="editColorPick3" size="small" :style="{background:'#AED9E9'}"  circle> </el-button>
                   </div>
                   <div class="commentslist">
                     <ul>
@@ -101,7 +107,7 @@
                   </div>
                   <el-form :model="editForm" onsubmit="return false;">
                     <el-form-item label="Comments" :label-width="formLabelWidth" size="medium">
-                      <el-input v-model="editForm.name" auto-complete="off"  @keyup.enter.native="addComments" style="width:400px;"></el-input>
+                      <el-input v-model="editForm.name" auto-complete="off"  @keyup.enter.native="addComments"></el-input>
                     </el-form-item>
                   </el-form>
 
@@ -119,12 +125,14 @@
             :i="1"
             :is-resizable="false"
             :is-draggable="false"
+            class="releaseGrid"
+
           >
-            <el-row>
-              <el-col :span="12">
+            <el-row class="releaseLine" :style="{border:none}">
+              <el-col :span="12" >
                 <el-dropdown trigger="click">
-											<span class="el-dropdown-link">
-												{{}}<i class="el-icon-arrow-down el-icon--right"></i>
+											<span class="release-dropdown-link">
+												release1<i class="el-icon-arrow-down el-icon--right"></i>
 											</span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="releaseDialogVisible = true">Show release detail</el-dropdown-item>
