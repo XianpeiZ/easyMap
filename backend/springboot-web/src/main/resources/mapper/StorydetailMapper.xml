@@ -39,4 +39,10 @@
     cood_x, cood_y
     from storyDetail
   </select>
+  <select id="findStoryByStoryId" resultMap="BaseResultMap">
+    select story_id, map_id, story_title, story_description, story_setup_date, story_last_modified_date,
+    cood_x, cood_y
+    from storyDetail
+    where story_id=#{storyId}
+  </select>
 </mapper>
