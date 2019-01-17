@@ -38,11 +38,12 @@
     select story_id, map_id, story_title, story_description, story_setup_date, story_last_modified_date, 
     cood_x, cood_y
     from storyDetail
+    where map_id=#{mapId,jdbcType=INTEGER}
   </select>
   <select id="findStoryByStoryId" resultMap="BaseResultMap">
     select story_id, map_id, story_title, story_description, story_setup_date, story_last_modified_date,
     cood_x, cood_y
     from storyDetail
-    where story_id=#{storyId}
+    where story_id=#{storyId,jdbcType=INTEGER}
   </select>
 </mapper>

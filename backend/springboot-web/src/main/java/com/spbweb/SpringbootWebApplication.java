@@ -1,5 +1,6 @@
 package com.spbweb;
 
+import com.spbweb.service.Impl.StorydetailServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
