@@ -21,14 +21,14 @@
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.spbweb.entity" targetProject="${models}" >
+        <javaModelGenerator targetPackage="com.spbweb.entity" targetProject="src/main/java" >
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetPackage="mapper" targetProject="${resources}" >
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" >
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
-        <javaClientGenerator targetPackage="com.spbweb.dao" targetProject="${dao}" type="XMLMAPPER" >
+        <javaClientGenerator targetPackage="com.spbweb.dao" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <table schema="easyMap" tableName="storyDetail"
