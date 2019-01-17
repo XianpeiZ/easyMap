@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/easyMap.iml" filepath="$PROJECT_DIR$/.idea/easyMap.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/springboot-web/springboot-web.iml" filepath="$PROJECT_DIR$/backend/springboot-web/springboot-web.iml" />
-    </modules>
-  </component>
-</project>
