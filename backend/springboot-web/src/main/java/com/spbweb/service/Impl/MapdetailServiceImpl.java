@@ -29,4 +29,12 @@ public class MapdetailServiceImpl implements MapdetailService
         temp = mapdetailMapper.selectAll();
         return temp;
     }
+
+    @Override
+    public int deleteMapByMapId (Integer mapId)
+    {
+        int ret;
+        ret = mapdetailMapper.deleteMapByMapId( mapId );
+        return ret;
+    }
 }

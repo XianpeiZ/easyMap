@@ -33,8 +33,25 @@ public class StorydetailServiceImpl implements StorydetailService
     @Override
     public int insert (Storydetail record)
     {
-        int ret ;
+        int ret;
         ret = storydetailMapper.insert( record );
+        return ret;
+    }
+
+    @Override
+    public int deleteStoryByStoryId (Integer storyId)
+    {
+        int ret;
+        ret = storydetailMapper.deleteStoryByStoryId( storyId );
+        return  ret;
+    }
+
+    @Override
+    public int updateStoryByStoryId(Integer storyId , Storydetail record)
+    {
+        record.setStoryId( storyId );
+        int ret;
+        ret = storydetailMapper.updateStoryByStoryId( storyId , record );
         return ret;
     }
 }

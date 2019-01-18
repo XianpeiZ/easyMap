@@ -37,4 +37,9 @@
     from mapDetail
     where map_id=#{mapId}
   </select>
+  <delete id="deleteMapByMapId">
+    delete
+    from mapDetail
+    where map_id=#{mapId}
+  </delete>
 </mapper>

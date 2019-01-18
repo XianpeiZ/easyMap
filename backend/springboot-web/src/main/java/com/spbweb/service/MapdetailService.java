@@ -10,4 +10,5 @@ public interface MapdetailService
 {
     public Mapdetail findMapByMapId (Integer mapId);
     public ArrayList<Mapdetail> selectAll ();
+    public int deleteMapByMapId (Integer mapId);
 }

@@ -25,4 +25,6 @@ public interface MapdetailMapper {
     ArrayList<Mapdetail> selectAll();
 
     Mapdetail findMapByMapId (Integer mapId);
+
+    int deleteMapByMapId (Integer mapId);
 }

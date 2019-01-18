@@ -46,4 +46,15 @@
     from storyDetail
     where story_id=#{storyId,jdbcType=INTEGER}
   </select>
+  <delete id="deleteStoryByStoryId">
+    delete 
+    from storyDetail 
+    where story_id=#{storyId}
+  </delete>
+  <update id="updateStoryByStoryId" parameterType="com.spbweb.entity.Storydetail">
+    update storyDetail
+    set map_id=#{mapId,jdbcType=INTEGER} , storyTitle=#{storyTitle,jdbcType=VARCHAR} , storyDescription=#{storyDescription,jdbcType=VARCHAR} ,
+    storyLastModifiedDate=#{storyLastModifiedDate,jdbcType=DATE} , coodX=#{coodX,jdbcType=DOUBLE} , coodY=#{coodY,jdbcType=DOUBLE}
+    where story_id=#{storyId}
+  </update>
 </mapper>
