@@ -1,6 +1,7 @@
 package com.spbweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.spbweb.service.MapdetailService;
 import com.spbweb.service.StorydetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class HelloController {
     @Autowired
     StorydetailService storydetailService;
 
+
     @RequestMapping("/success")
     public String success(Map<String, Object> map){
         map.put("hello", "nihao");
@@ -41,15 +43,5 @@ public class HelloController {
     
 
     }
-    
-    @ResponseBody
-    @PostMapping("/api/map")    
-    public String map(@RequestParam String data)
-    {
-    	System.out.println("2131");
-    	String flag1 = (String) JSONObject.parse(data);
-		System.out.println(flag1);
-		System.out.println("2131");
-		return "true";
-    }
+
 }
