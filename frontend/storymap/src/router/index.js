@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import helloworld from '@/components/helloworld'
 // import NewContact from '@/components/NewContact'
 import dashBoard from '@/views/dash/dashBoard'
 import test from '@/components/test'
@@ -16,7 +16,7 @@ export default new Router({
       // redirect (to) {
       //   return '/helloworld'
       // }
-      component: HelloWorld
+      component: helloworld
     },
     {
       path: '/dash/dashBoard',

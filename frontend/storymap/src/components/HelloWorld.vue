@@ -202,12 +202,12 @@
 // export default HelloWorld
 // export default {
 //   name: 'HelloWorld',
-import MapClass from './MapClass.js'
+import MapClass from './mapclass.js'
 
 export default MapClass
 
 // }
 </script>
 <style lang="less">
-  @import url("./HelloWorld.less");
+  @import url("./helloworld.less");
 </style>

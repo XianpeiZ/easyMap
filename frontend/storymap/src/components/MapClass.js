@@ -1,3 +1,6 @@
+import axios from 'axios'
+import $ from 'jquery'
+import QS from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
@@ -105,13 +108,20 @@ export default {
     // ————————————————————————————————————————————————————————————————————————————————
     // MAP的增删改查
     newMap: function (newMapname, newMapDesc) {
-      this.saveMap()
       this.map.name = newMapname
       this.map.desc = newMapDesc
       this.newMapname = ''
       this.newMapDesc = ''
       this.newMapDialogVisible = false
       this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
+
+      data = '123'
+      axios.post('http://localhost:8000/api/map',JSON.stringify(data
+      )).then(function (response) {
+        　　this.$message('New Map Save successfully')
+        }).catch(function (error) {
+          　this.$message('New Map Save failedly')
+        })
     },
 
     saveMap () {

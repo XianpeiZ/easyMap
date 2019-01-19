@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 /* eslint-disable*/
 import Vue from 'vue'
+import axios from 'axios'
 // import HelloWorld from './components/HelloWorld'
 import router from './router'
 import store from './store'
@@ -20,6 +21,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 // Vue.component(VTable.name, VTable)
 // Vue.component(VPagination.name, VPagination)
 // const EventBus = new Vue();
+Vue.use(axios)
 Vue.use(ElementUI)
 Vue.use(vueGridLayout)
 Vue.use(ElementUI)
@@ -27,6 +29,8 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(vueKanban)
 Vue.config.productionTip = true
 Vue.config.devtools = true
+
+axios.defaults.baseURL="http://localhost:8080/"
 // /* eslint-disable no-new */
 new Vue({
   el: '#app',

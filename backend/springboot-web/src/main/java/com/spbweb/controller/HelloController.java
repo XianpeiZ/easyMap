@@ -1,10 +1,14 @@
 package com.spbweb.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spbweb.service.StorydetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
@@ -34,7 +38,18 @@ public class HelloController {
         map.put("hello", storydetailService.findStoryByStoryId( storyId ));
         //classpath:/templates/success.html
         return "success";
+    
 
-
+    }
+    
+    @ResponseBody
+    @PostMapping("/api/map")    
+    public String map(@RequestParam String data)
+    {
+    	System.out.println("2131");
+    	String flag1 = (String) JSONObject.parse(data);
+		System.out.println(flag1);
+		System.out.println("2131");
+		return "true";
     }
 }

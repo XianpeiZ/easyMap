@@ -14,10 +14,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "el-dropdown": "^1.0.1",
     "element": "^0.1.4",
     "element-ui": "^2.4.11",
+    "jquery": "^3.3.1",
     "node-sass": "^4.11.0",
+    "qs": "^6.6.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.22",
     "vue-awesome-swiper": "^3.1.3",
