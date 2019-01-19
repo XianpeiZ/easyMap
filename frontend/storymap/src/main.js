@@ -22,6 +22,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 // Vue.component(VPagination.name, VPagination)
 // const EventBus = new Vue();
 Vue.use(axios)
+axios.defaults.baseURL="http://localhost:8000/api"
+Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.use(vueGridLayout)
 Vue.use(ElementUI)
@@ -30,7 +32,8 @@ Vue.use(vueKanban)
 Vue.config.productionTip = true
 Vue.config.devtools = true
 
-axios.defaults.baseURL="http://localhost:8080/"
+
+
 // /* eslint-disable no-new */
 new Vue({
   el: '#app',

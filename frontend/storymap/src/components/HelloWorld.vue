@@ -10,10 +10,10 @@
     <div class="dash">
       <div>
         <el-row>
-          <el-col :span="5" class="dashtitle"><h2>{{map.name}}</h2>
-            <div class="grid-content bg-purple"></div>
+          <el-col :span="10" class="dashtitle"><h2>{{map.name}}</h2>
+            <!-- <div class="grid-content bg-purple"></div> -->
           </el-col>
-          <el-col :span="15" :push="10" style="padding-left: 2%;">
+          <el-col :span="15"  style="right">
             <div class="grid-content bg-purple">
               <el-button :plain="true" type="info" @click.native="showMapDialogVisible = true"><i
                 class="el-icon-view el-icon--left"></i> Show Map
@@ -57,9 +57,9 @@
                      @move="moveEvent"
                      @moved="movedEvent"
                      class="griditem"
-                     :style="{background:colorPick}"
+                     :style="{background:item.colorPick}"
           >
-            <el-row class="drag-title" :style="{background:colorPick}">
+            <el-row class="drag-title" :style="{background:item.colorPick}">
               <el-col :span="14">card:{{item.i}}</el-col>
               <el-col :span="6" class="ico">
                 <!-- <el-dropdown   @command="handleCommand"> -->
@@ -82,21 +82,21 @@
             </el-row>
             <el-row class="editButton">
               <!--<el-col :span="21">-->
-              <el-button type="text" @click.native="editDialogFormVisible = true"><i class="el-icon-edit"></i></el-button>
+              <el-button type="text" @click.native="showEditDialogFormVisible(index)"><i class="el-icon-edit"></i></el-button>
               <!--</el-col>-->
             </el-row>
-          </grid-item>
+        </grid-item>
           <!--编辑备注卡片信息-->
-          <span class="editdialog">
+         <span class="editdialog">
                 <el-dialog title="card" :visible.sync="editDialogFormVisible ">
                   <div class="colorPick1">
-                    <el-button  @click.native="editColorPick1" size="small" :style="{background:'#FE8A8B'}"  circle> </el-button>
+                    <el-button  @click.native="editColorPick1(index)" size="small" :style="{background:'#FE8A8B'}"  circle> </el-button>
                   </div>
                   <div class="colorPick2">
-                    <el-button  @click.native="editColorPick2" size="small" :style="{background:'#FAE75C'}"  circle> </el-button>
+                    <el-button  @click.native="editColorPick2(index)" size="small" :style="{background:'#FAE75C'}"  circle> </el-button>
                   </div>
                   <div class="colorPick3">
-                    <el-button  @click.native="editColorPick3" size="small" :style="{background:'#AED9E9'}"  circle> </el-button>
+                    <el-button  @click.native="editColorPick3(index)" size="small" :style="{background:'#AED9E9'}"  circle> </el-button>
                   </div>
                   <div class="commentslist">
                     <ul>
@@ -117,6 +117,7 @@
                   </div>
                 </el-dialog>
               </span>
+
           <grid-item
             :x="0"
             :y="6"

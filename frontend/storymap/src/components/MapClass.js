@@ -1,6 +1,6 @@
-import axios from 'axios'
-import $ from 'jquery'
-import QS from 'qs'
+// import axios from 'axios'
+// import $ from 'jquery'
+import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
@@ -8,11 +8,14 @@ var GridItem = vueGridLayout.GridItem
 export default {
   data () {
     return {
+      currentItem: '',
       cardWidth: 1,
       cardHight: 3,
       gridColNum: 10,
+      sendLayout: [],
+      card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []},
       layout1: [
-        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card'}
+        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
         // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false, 'type': 'card'},
         // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false, 'type': 'card'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false, 'type': 'card'},
@@ -35,7 +38,7 @@ export default {
         // {'x': 3, 'y': 3, 'w': 1, 'h': 3, 'i': 7, 'flag': false}
       ],
       initLayout: [
-        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card'}
+        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
       ],
       release: {
         name: '',
@@ -115,16 +118,35 @@ export default {
       this.newMapDialogVisible = false
       this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
 
-      data = '123'
-      axios.post('http://localhost:8000/api/map',JSON.stringify(data
+      this.$axios.post('/addNewMap', qs.stringify({newMapname, newMapDesc}
       )).then(function (response) {
-        　　this.$message('New Map Save successfully')
-        }).catch(function (error) {
-          　this.$message('New Map Save failedly')
-        })
+        console.log(response.data)
+        if (response.data) {
+          // console.log('234324')
+          this.$message('saved successfully')
+        }
+        // eslint-disable-next-line handle-callback-err
+      }).catch(function (error) {
+        this.$message('New Map Save failedly')
+      })
     },
 
     saveMap () {
+      // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-array-constructor
+      let tempLay = JSON.stringify(this.layout1)
+      console.log(tempLay)
+      console.log(typeof (tempLay))
+      // tempLay = JSON.parse(JSON.stringify(this.layout1))
+      this.$axios.post('/saveMap', qs.stringify({tempLay}
+      )).then(function (response) {
+        if (response.data) {
+          // this.$$message(' Map Save successfully')
+        }
+        // eslint-disable-next-line handle-callback-err
+      }).catch(function (error) {
+        // this.$message('Map Save failedly')
+      })
       this.$message('save')
     },
 
@@ -134,12 +156,22 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.map.name = ''
-        this.map.desc = ''
-        this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
+        let mapName = this.map.name
+        this.$axios.post('/deleteMap', qs.stringify({mapName}
+        )).then(function (response) {
+          console.log(response.data)
+          if (response.data) {
+            this.map.name = ''
+            this.map.desc = ''
+            this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+          }
+          // eslint-disable-next-line handle-callback-err
+        }).catch(function (error) {
+          this.$message('delete failed ')
         })
       }).catch(() => {
         this.$message({
@@ -155,6 +187,11 @@ export default {
       // console.log(index)
       this.layout1.splice(index, 1)
       // this.historyLayout1.splice(index, 1)
+    },
+
+    showEditDialogFormVisible: function (index) {
+      this.editDialogFormVisible = true
+      this.currentItem = index
     },
 
     judgeItemPosition: function (newX, newY) {
@@ -211,13 +248,13 @@ export default {
       this.editForm.name = ''
     },
     editColorPick1: function () {
-      this.colorPick = '#FE8A8B'
+      this.layout1[this.currentItem].colorPick = '#FE8A8B'
     },
     editColorPick2: function () {
-      this.colorPick = '#FAE75C'
+      this.layout1[this.currentItem].colorPick = '#FAE75C'
     },
     editColorPick3: function () {
-      this.colorPick = '#AED9E9'
+      this.layout1[this.currentItem].colorPick = '#AED9E9'
     },
     toChangePosition: function (i) {
       let layout = this.layout1
