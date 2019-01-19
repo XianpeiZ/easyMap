@@ -166,7 +166,7 @@
           <el-dialog title="New Map" :visible.sync="newMapDialogVisible">
             <el-form>
               <el-form-item label="name" :label-width="formLabelWidth">
-                <el-input v-model="newMapname" autocomplete="off"></el-input>
+                <el-input v-model="newMapName" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item label="description" :label-width="formLabelWidth">
                 <el-input v-model="newMapDesc" autocomplete="off"></el-input>
@@ -174,7 +174,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button @click="newMapDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click.native="newMap(newMapname,newMapDesc)">确 定</el-button>
+              <el-button type="primary" @click.native="newMap(newMapName,newMapDesc)">确 定</el-button>
             </div>
           </el-dialog>
           <el-dialog title="Show Map" :visible.sync="showMapDialogVisible">

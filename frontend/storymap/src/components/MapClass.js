@@ -8,6 +8,7 @@ var GridItem = vueGridLayout.GridItem
 export default {
   data () {
     return {
+      newMapName: '',
       currentItem: '',
       cardWidth: 1,
       cardHight: 3,
@@ -57,7 +58,6 @@ export default {
         name: '',
         desc: ''
       },
-      newMapname: '',
       newMapDesc: '',
       editDialogFormVisible: false,
       editForm: {
@@ -110,15 +110,15 @@ export default {
 
     // ————————————————————————————————————————————————————————————————————————————————
     // MAP的增删改查
-    newMap: function (newMapname, newMapDesc) {
-      this.map.name = newMapname
+    newMap: function (newMapName, newMapDesc) {
+      this.map.name = newMapName
       this.map.desc = newMapDesc
-      this.newMapname = ''
+      this.newMapName = ''
       this.newMapDesc = ''
       this.newMapDialogVisible = false
       this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
 
-      this.$axios.post('/addNewMap', qs.stringify({newMapname, newMapDesc}
+      this.$axios.post('/addNewMap', qs.stringify({newMapName, newMapDesc}
       )).then(function (response) {
         console.log(response.data)
         if (response.data) {
