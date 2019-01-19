@@ -39,6 +39,13 @@ public class MapdetailServiceImpl implements MapdetailService
     }
 
     @Override
+    public int deleteMapByMapName (String mapName){
+        int res;
+        res = mapdetailMapper.deleteMapByMapName(mapName);
+        return res;
+    }
+
+    @Override
     public int insert(Mapdetail mapdetail){
         int res;
         res = mapdetailMapper.insert(mapdetail);

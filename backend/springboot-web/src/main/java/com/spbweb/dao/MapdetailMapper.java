@@ -27,4 +27,6 @@ public interface MapdetailMapper {
     Mapdetail findMapByMapId (Integer mapId);
 
     int deleteMapByMapId (Integer mapId);
+
+    int deleteMapByMapName (String mapName);
 }
