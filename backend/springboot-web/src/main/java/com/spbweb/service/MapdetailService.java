@@ -8,9 +8,10 @@ import java.util.ArrayList;
 @Repository
 public interface MapdetailService
 {
-    public Mapdetail findMapByMapId (Integer mapId);
-    public ArrayList<Mapdetail> selectAll ();
-    public int deleteMapByMapId (Integer mapId);
-    public int deleteMapByMapName (String mapName);
-    public int insert(Mapdetail mapdetail);
+    Mapdetail findMapByMapId (Integer mapId);
+    ArrayList<Mapdetail> selectAll ();
+    int deleteMapByMapId (Integer mapId);
+    int deleteMapByMapName (String mapName);
+    int insert(Mapdetail mapdetail);
+    Mapdetail findMapByMapName(String mapName);
 }

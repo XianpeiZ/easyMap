@@ -33,6 +33,13 @@
     select map_id, map_name, map_owner, map_setup_date, map_descrpt
     from mapDetail
   </select>
+
+  <select id="findMapByMapName" resultMap="BaseResultMap">
+    select map_id, map_name, map_owner, map_setup_date, map_descrpt
+    from mapDetail
+    where map_name=#{mapName}
+  </select>
+
   <select id="findMapByMapId" resultMap="BaseResultMap">
     select map_id, map_name, map_owner, map_setup_date, map_descrpt
     from mapDetail

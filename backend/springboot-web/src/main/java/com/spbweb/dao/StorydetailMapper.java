@@ -24,6 +24,8 @@ public interface StorydetailMapper {
      */
     ArrayList<Storydetail> selectAll(Integer mapId);
 
+    ArrayList<Storydetail> selectAllByMapName(String mapName);
+
     Storydetail findStoryByStoryId (Integer storyId);
 
     int deleteStoryByStoryId(Integer storyId);

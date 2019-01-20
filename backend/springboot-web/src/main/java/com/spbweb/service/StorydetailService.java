@@ -8,9 +8,9 @@ import java.util.ArrayList;
 @Repository
 public interface StorydetailService
 {
-    public Storydetail findStoryByStoryId (Integer storyId);
-    public ArrayList<Storydetail> selectAll (Integer mapId);
-    public int insert (Storydetail record);
-    public int deleteStoryByStoryId (Integer storyId);
-    public int updateStoryByStoryId (Integer storyId , Storydetail record);
+    Storydetail findStoryByStoryId (Integer storyId);
+    ArrayList<Storydetail> selectAll (Integer mapId);
+    int insert (Storydetail record);
+    int deleteStoryByStoryId (Integer storyId);
+    int updateStoryByStoryId (Integer storyId , Storydetail record);
 }

@@ -51,4 +51,10 @@ public class MapdetailServiceImpl implements MapdetailService
         res = mapdetailMapper.insert(mapdetail);
         return res;
     }
+
+    @Override
+    public Mapdetail findMapByMapName(String mapName){
+        Mapdetail res = mapdetailMapper.findMapByMapName(mapName);
+        return res;
+    }
 }

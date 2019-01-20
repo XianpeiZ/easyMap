@@ -30,6 +30,7 @@ public class StorydetailServiceImpl implements StorydetailService
         return temp;
     }
 
+
     @Override
     public int insert (Storydetail record)
     {

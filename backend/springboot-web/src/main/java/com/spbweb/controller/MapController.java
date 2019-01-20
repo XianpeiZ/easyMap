@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.spbweb.entity.Mapdetail;
+import com.spbweb.entity.Storydetail;
 import com.spbweb.service.MapdetailService;
+import com.spbweb.service.StorydetailService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,9 @@ public class MapController {
 
     @Autowired
     MapdetailService mapdetailService;
+
+    @Autowired
+    StorydetailService storydetailService;
 
     /**
      * 新建map
@@ -82,6 +88,19 @@ public class MapController {
         }
 
         return 0;
+    }
+
+    @PostMapping("/api/getBackendMap")
+    @ResponseBody
+    public String getMap(@RequestParam String mapName){
+        Mapdetail m = mapdetailService.findMapByMapName(mapName);
+        int mapId = m.getMapId();
+        System.out.println(mapId);
+        ArrayList<Storydetail> res = storydetailService.selectAll(mapId);
+        System.out.println(res);
+        String re = JSON.toJSONString(res);
+        System.out.println(re);
+        return re;
     }
 
 }
