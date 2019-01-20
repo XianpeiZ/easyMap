@@ -14,9 +14,8 @@ export default {
       cardHight: 3,
       gridColNum: 10,
       sendLayout: [],
-      card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []},
+      card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []},
       layout1: [
-        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
         // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false, 'type': 'card'},
         // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false, 'type': 'card'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false, 'type': 'card'},
@@ -39,7 +38,6 @@ export default {
         // {'x': 3, 'y': 3, 'w': 1, 'h': 3, 'i': 7, 'flag': false}
       ],
       initLayout: [
-        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
       ],
       release: {
         name: '',
@@ -95,6 +93,11 @@ export default {
         this.toChangePosition(i)
         this.watch_num = 0
       }
+      for (var j = 0; j < this.layout1.length; j++) {
+        if (this.layout1[j].i === i) {
+          this.layout1[j].flag = 1
+        }
+      }
       // console.log('MOVED i=' + i + ', X=' + newX + ', Y=' + newY)
     },
 
@@ -110,13 +113,32 @@ export default {
 
     // ————————————————————————————————————————————————————————————————————————————————
     // MAP的增删改查
+    // 从后端获取MAP信息
+    getBackendMap: function () {
+      this.$axios.get('/getBackendMap').then(function (response) {
+        console.log(response.data)
+        // this.$$message(' Map Save successfully')
+        // eslint-disable-next-line handle-callback-err
+      }).catch(function (error) {
+        // this.$message('Map Save failedly')
+      })
+      this.$message('getmap')
+    },
+
+    showMap: function () {
+      this.showMapDialogVisible = true
+    },
+
     newMap: function (newMapName, newMapDesc) {
       this.map.name = newMapName
       this.map.desc = newMapDesc
       this.newMapName = ''
       this.newMapDesc = ''
       this.newMapDialogVisible = false
-      this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
+      var tempcard = JSON.parse(JSON.stringify(this.card1))
+      tempcard.i = Number(new Date())
+      // console.log(tempcard)
+      this.layout1.push(tempcard)
 
       this.$axios.post('/addNewMap', qs.stringify({newMapName, newMapDesc}
       )).then(function (response) {
@@ -164,10 +186,10 @@ export default {
             this.map.name = ''
             this.map.desc = ''
             this.layout1 = JSON.parse(JSON.stringify(this.initLayout))
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
+            // this.$message({
+            //   type: 'success',
+            //   message: '删除成功!'
+            // })
           }
           // eslint-disable-next-line handle-callback-err
         }).catch(function (error) {
@@ -184,8 +206,13 @@ export default {
     // ——————————————————————————————————————————————————————————————————————————
     // 这里是对card Item 的增删改查
     deleteItem: function (index) {
+      if (this.layout1.length > 1) {
+        this.layout1.splice(index, 1)
+      } else {
+        this.$message('Cannot delete When there is only one card')
+      }
       // console.log(index)
-      this.layout1.splice(index, 1)
+
       // this.historyLayout1.splice(index, 1)
     },
 
@@ -246,15 +273,19 @@ export default {
       })
       console.log(this.editForm.name)
       this.editForm.name = ''
+      this.layout1[this.currentItem].flag = 1
     },
     editColorPick1: function () {
       this.layout1[this.currentItem].colorPick = '#FE8A8B'
+      this.layout1[this.currentItem].flag = 1
     },
     editColorPick2: function () {
       this.layout1[this.currentItem].colorPick = '#FAE75C'
+      this.layout1[this.currentItem].flag = 1
     },
     editColorPick3: function () {
       this.layout1[this.currentItem].colorPick = '#AED9E9'
+      this.layout1[this.currentItem].flag = 1
     },
     toChangePosition: function (i) {
       let layout = this.layout1
@@ -314,10 +345,14 @@ export default {
         }
         var x = this.layout1[index].x + 1
         var y = this.layout1[index].y
-        var zi = (this.layout1.length)
-        var newItem = {'x': x, 'y': y, 'w': 1, 'h': 3, 'i': zi}
-        this.layout1.push(newItem)
-        this.historyLayout1.push(newItem)
+        var id = Number(new Date())
+        var tempCard = JSON.parse(JSON.stringify(this.layout1[index]))
+        tempCard.x = x
+        tempCard.y = y
+        tempCard.i = id
+        tempCard.flag = 0
+        this.layout1.push(tempCard)
+        this.historyLayout1.push(tempCard)
       }
       // 如果是第二行
       if (this.layout1[index].y === 3) {
@@ -330,12 +365,15 @@ export default {
         }
         x = this.layout1[index].x + 1
         y = this.layout1[index].y
-        // console.log(y)
-        i = (this.layout1.length)
-        newItem = {'x': x, 'y': y, 'w': 1, 'h': 3, 'i': i}
-        this.layout1.push(newItem)
-        this.historyLayout1.push(newItem)
-        console.log(this.layout1)
+        id = Number(new Date())
+        // eslint-disable-next-line no-redeclare
+        var tempCard = JSON.parse(JSON.stringify(this.layout1[index]))
+        tempCard.x = x
+        tempCard.y = y
+        tempCard.i = id
+        tempCard.flag = 0
+        this.layout1.push(tempCard)
+        this.historyLayout1.push(tempCard)
         // console.log(this.historyLayout1)
       }
     },
@@ -349,27 +387,31 @@ export default {
       }
       var x = this.layout1[index].x
       var y = this.layout1[index].y + 3
-      i = (this.layout1.length)
-      var newItem = {'x': x, 'y': y, 'w': 1, 'h': 3, 'i': i}
-      this.layout1.push(newItem)
-      this.historyLayout1.push(newItem)
-    }
-  },
+      var id = Number(new Date())
+      var tempCard = JSON.parse(JSON.stringify(this.layout1[index]))
+      tempCard.x = x
+      tempCard.y = y
+      tempCard.i = id
+      tempCard.flag = 0
+      this.layout1.push(tempCard)
+      this.historyLayout1.push(tempCard)
+    },
 
-  // ————————————————————————————————————————————————————
-  // 这里可以是一些控制函数
-  handleCommand (param) {
-    this.$message(param)
-  },
-  getTemplate (templateName) {
-    return require('../components/' + templateName + '.vue')
-  },
-  watch: {
-  //   layout: {
-  //     handler: function (val, oldVal) {
-  //       console.log(val)
-  //     },
-  //     deep: true
-  //   }
+    // ————————————————————————————————————————————————————
+    // 这里可以是一些控制函数
+    handleCommand (param) {
+      this.$message(param)
+    },
+    getTemplate (templateName) {
+      return require('../components/' + templateName + '.vue')
+    },
+    watch: {
+      //   layout: {
+      //     handler: function (val, oldVal) {
+      //       console.log(val)
+      //     },
+      //     deep: true
+      //   }
+    }
   }
 }

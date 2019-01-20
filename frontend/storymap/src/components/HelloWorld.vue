@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home"  >
     <!-- <el-row class="dashcontent">
         <el-col :span="3" class="left-menu">
                          <el-row class="tac">
@@ -15,7 +15,7 @@
           </el-col>
           <el-col :span="15"  style="right">
             <div class="grid-content bg-purple">
-              <el-button :plain="true" type="info" @click.native="showMapDialogVisible = true"><i
+              <el-button :plain="true" type="info" @click.native="showMap"><i
                 class="el-icon-view el-icon--left"></i> Show Map
               </el-button>
               <el-button :plain="true" type="info" @click.native="newMapDialogVisible = true"><i

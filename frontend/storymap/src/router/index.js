@@ -4,6 +4,7 @@ import helloworld from '@/components/helloworld'
 // import NewContact from '@/components/NewContact'
 import dashBoard from '@/views/dash/dashBoard'
 import test from '@/components/test'
+import maplist from '@/components/maplist'
 // import {dash} from 'views/'
 Vue.use(Router)
 
@@ -29,6 +30,12 @@ export default new Router({
       name: 'test',
       hidden: true,
       component: test
+    },
+    {
+      path: '/components/maplist',
+      name: 'maplist',
+      hidden: true,
+      component: maplist
     }
   ]
 })
