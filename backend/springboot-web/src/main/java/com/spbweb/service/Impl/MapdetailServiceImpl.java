@@ -57,4 +57,5 @@ public class MapdetailServiceImpl implements MapdetailService
         Mapdetail res = mapdetailMapper.findMapByMapName(mapName);
         return res;
     }
+    
 }

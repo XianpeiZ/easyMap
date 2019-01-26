@@ -21,7 +21,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 // Vue.component(VTable.name, VTable)
 // Vue.component(VPagination.name, VPagination)
 // const EventBus = new Vue();
-Vue.use(axios)
+// Vue.use(router)
 axios.defaults.baseURL="http://localhost:8000/api"
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)

@@ -51,3 +51,33 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 
 ### 5.目前前端还有的问题是： 横向拓展、release 、以及卡片的位置选择问题
 
+## 问题解决（1.26）
+
+### 1.Failed to mount component: template or render function not defined.
+	1.1 http://www.jianshu.com/p/4d61f71de95a
+    router 文件 中 component 和components  的问题
+	
+### 2.Uncaught (in promise) TypeError: Cannot read property 'protocol' of undefined
+	2.1 https://blog.csdn.net/weixin_42470791/article/details/82936957
+    ok 到这部错误是全部都消除了，但是页面没东西。。。。。
+### 3 ok 最后找见bug 了 
+    3.1
+ 	import showmap from '../components/showmap'  
+    import showmap from '../components/showmap.vue'
+    默认import js 文件 需要加上.vue 表示很呵呵，浪费了不少时间 
+### 4 关于this.$axios 中作用域问题
+   	 可以增加这句话 let that = this 来解决
+### 5 关于vue 数组和jsonarray 之间的转化问题
+
+### 6 连接数据库
+    navicat 输入 连接的IP 端口号3306 以及用户名和密码 
+### 7 vue 页面跳转传参数的小坑
+    router.push() 里边 把path 换成name 就传成功了 
+	
+	即：{name:'页面的名字'，params：{参数名：参数值}}
+    
+	获取页面通过 router.params.参数名就可以获取了 
+### 8 考虑页面回退缓存问题 以及好多细节问题 ，对页面进行美化
+	 
+      
+

@@ -102,5 +102,14 @@ public class MapController {
         System.out.println(re);
         return re;
     }
+    
+    // 获取user的所有map
+    @PostMapping("/api/getMapList")
+    @ResponseBody
+    public String getMapList(@RequestParam String userName){
+    	System.out.println(userName);
+    	return "shoudao";
+        
+    }
 
 }

@@ -1,9 +1,11 @@
-// import axios from 'axios'
+import axios from 'axios'
+import Vue from 'vue'
 // import $ from 'jquery'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
+Vue.prototype.$axios = axios
 
 export default {
   data () {
@@ -16,6 +18,7 @@ export default {
       sendLayout: [],
       card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []},
       layout1: [
+        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
         // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false, 'type': 'card'},
         // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false, 'type': 'card'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false, 'type': 'card'},
@@ -48,12 +51,11 @@ export default {
       formatLayoutVisible: false,
       addDashVisiable: false,
       releaseDialogVisible: false,
-      newMapDialogVisible: false,
       showMapDialogVisible: false,
       curBox: null,
       watch_num: 0,
       map: {
-        name: '',
+        name: this.$route.params.currentMapName,
         desc: ''
       },
       newMapDesc: '',
@@ -75,11 +77,13 @@ export default {
     }
   },
   mounted () {
-
+    this.getBackendMap()
   },
   components: {
     GridLayout,
     GridItem
+  },
+  watch: {
   },
   methods: {
     // 这里是系统Event
@@ -115,42 +119,32 @@ export default {
     // MAP的增删改查
     // 从后端获取MAP信息
     getBackendMap: function () {
-      this.$axios.get('/getBackendMap').then(function (response) {
+      var that = this
+      var mapName = this.map.name
+      this.$axios.post('/getBackendMap', qs.stringify({mapName}
+      )).then(function (response) {
         console.log(response.data)
-        // this.$$message(' Map Save successfully')
-        // eslint-disable-next-line handle-callback-err
+        that.layout1[0].title = response.data[0].storyTitle
+        for (var i = 0; i < response.data.length; i++) {
+          that.layout1[i] = JSON.parse(JSON.stringify(that.card1))
+          that.layout1[i].x = response.data[i].coodX
+          that.layout1[i].y = response.data[i].coodY
+          that.layout1[i].colorPick = response.data[i].colorPick
+          that.layout1[i].title = response.data[i].storyTitle
+          that.layout1[i].des = response.data[i].storyDescription
+          that.layout1[i].i = response.data[i].storyId
+        }
+        console.log(that.layout1)
+        // for(var i = 0 ;i <response.data.size())
+      // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
         // this.$message('Map Save failedly')
+        console.log(error)
       })
-      this.$message('getmap')
     },
 
     showMap: function () {
       this.showMapDialogVisible = true
-    },
-
-    newMap: function (newMapName, newMapDesc) {
-      this.map.name = newMapName
-      this.map.desc = newMapDesc
-      this.newMapName = ''
-      this.newMapDesc = ''
-      this.newMapDialogVisible = false
-      var tempcard = JSON.parse(JSON.stringify(this.card1))
-      tempcard.i = Number(new Date())
-      // console.log(tempcard)
-      this.layout1.push(tempcard)
-
-      this.$axios.post('/addNewMap', qs.stringify({newMapName, newMapDesc}
-      )).then(function (response) {
-        console.log(response.data)
-        if (response.data) {
-          // console.log('234324')
-          this.$message('saved successfully')
-        }
-        // eslint-disable-next-line handle-callback-err
-      }).catch(function (error) {
-        this.$message('New Map Save failedly')
-      })
     },
 
     saveMap () {
@@ -404,14 +398,6 @@ export default {
     },
     getTemplate (templateName) {
       return require('../components/' + templateName + '.vue')
-    },
-    watch: {
-      //   layout: {
-      //     handler: function (val, oldVal) {
-      //       console.log(val)
-      //     },
-      //     deep: true
-      //   }
     }
   }
 }

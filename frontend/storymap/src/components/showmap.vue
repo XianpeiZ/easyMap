@@ -16,10 +16,7 @@
           <el-col :span="15"  style="right">
             <div class="grid-content bg-purple">
               <el-button :plain="true" type="info" @click.native="showMap"><i
-                class="el-icon-view el-icon--left"></i> Show Map
-              </el-button>
-              <el-button :plain="true" type="info" @click.native="newMapDialogVisible = true"><i
-                class="el-icon-plus el-icon--left"></i> New Map
+                class="el-icon-edit el-icon--left"></i> Edit Map
               </el-button>
               <el-button :plain="true" type="info" @click.native="deleteMap"><i
                 class="el-icon-delete el-icon--left"></i>Delete Map
@@ -60,7 +57,7 @@
                      :style="{background:item.colorPick}"
           >
             <el-row class="drag-title" :style="{background:item.colorPick}">
-              <el-col :span="14">card:{{item.i}}</el-col>
+              <el-col :span="14">{{item.title}}</el-col>
               <el-col :span="6" class="ico">
                 <!-- <el-dropdown   @command="handleCommand"> -->
                 <el-dropdown>
@@ -76,7 +73,7 @@
               </el-col>
             </el-row>
             <el-row class="drag-content">
-              <el-col :span="21">
+              <el-col :span="21" >{{item.desc}}
                 <component v-bind:is="item.component"></component>
               </el-col>
             </el-row>
@@ -163,20 +160,6 @@
               <el-button type="primary" @click="releaseDialogVisible = false">确 定</el-button>
             </div>
           </el-dialog>
-          <el-dialog title="New Map" :visible.sync="newMapDialogVisible">
-            <el-form>
-              <el-form-item label="name" :label-width="formLabelWidth">
-                <el-input v-model="newMapName" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="description" :label-width="formLabelWidth">
-                <el-input v-model="newMapDesc" autocomplete="off"></el-input>
-              </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-              <el-button @click="newMapDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click.native="newMap(newMapName,newMapDesc)">确 定</el-button>
-            </div>
-          </el-dialog>
           <el-dialog title="Show Map" :visible.sync="showMapDialogVisible">
             <el-form :model="map">
               <el-form-item label="name" :label-width="formLabelWidth">
@@ -203,12 +186,12 @@
 // export default HelloWorld
 // export default {
 //   name: 'HelloWorld',
-import MapClass from './mapclass.js'
+import MapClass from './showmap.js'
 
 export default MapClass
 
 // }
 </script>
 <style lang="less">
-  @import url("./helloworld.less");
+  @import url("./showmap.less");
 </style>
