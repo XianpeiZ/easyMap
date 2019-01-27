@@ -15,7 +15,7 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 
 
 
-## 问题解决（1.19）
+## 问题解决（1.19 by Terry）
 
 ### 1.解决：Invalid character found in method name. HTTP method names must be tokens
  
@@ -51,7 +51,7 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 
 ### 5.目前前端还有的问题是： 横向拓展、release 、以及卡片的位置选择问题
 
-## 问题解决（1.26）
+## 问题解决（1.26 by Terry）
 
 ### 1.Failed to mount component: template or render function not defined.
 	1.1 http://www.jianshu.com/p/4d61f71de95a
