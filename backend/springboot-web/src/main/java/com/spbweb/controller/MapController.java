@@ -41,7 +41,7 @@ public class MapController {
             Mapdetail mapdetail = new Mapdetail();
             mapdetail.setMapName(newMapName);
             mapdetail.setMapOwner("zhangsan");
-            mapdetail.setMapSetupDate(new Date());
+            mapdetail.setMapSetupDate(new Date().getTime());
             mapdetail.setMapDescrpt(newMapDesc);
             this.mapdetailService.insert(mapdetail);
             return "ok";
@@ -106,9 +106,12 @@ public class MapController {
     // 获取user的所有map
     @PostMapping("/api/getMapList")
     @ResponseBody
-    public String getMapList(@RequestParam String userName){
+    public Object getMapList(@RequestParam String userName){
     	System.out.println(userName);
-    	return "shoudao";
+        ArrayList<Mapdetail> res = mapdetailService.findMapByMapOwner(userName);
+        String re = JSON.toJSONString(res);
+        System.out.println(re);
+    	return re;
         
     }
 

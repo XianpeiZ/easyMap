@@ -31,6 +31,8 @@ public interface MapdetailMapper {
     int deleteMapByMapName (String mapName);
 
     Mapdetail findMapByMapName (String mapName);
+
+    ArrayList<Mapdetail> findMapByMapOwner(String mapOwner);
     
     
 }

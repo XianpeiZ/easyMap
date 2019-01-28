@@ -14,4 +14,5 @@ public interface MapdetailService
     int deleteMapByMapName (String mapName);
     int insert(Mapdetail mapdetail);
     Mapdetail findMapByMapName(String mapName);
+    ArrayList<Mapdetail> findMapByMapOwner(String mapOwner);
 }

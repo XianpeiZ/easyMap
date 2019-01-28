@@ -57,5 +57,11 @@ public class MapdetailServiceImpl implements MapdetailService
         Mapdetail res = mapdetailMapper.findMapByMapName(mapName);
         return res;
     }
+
+    @Override
+    public ArrayList<Mapdetail> findMapByMapOwner(String userName){
+        ArrayList<Mapdetail> res = mapdetailMapper.findMapByMapOwner(userName);
+        return res;
+    }
     
 }

@@ -38,7 +38,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    private Date mapSetupDate;
+    private long mapSetupDate;
 
     private String mapDescrpt;
 
@@ -131,7 +131,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    public Date getMapSetupDate() {
+    public long getMapSetupDate() {
         return mapSetupDate;
     }
 
@@ -143,7 +143,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setMapSetupDate(Date mapSetupDate) {
+    public void setMapSetupDate(long mapSetupDate) {
         this.mapSetupDate = mapSetupDate;
     }
 

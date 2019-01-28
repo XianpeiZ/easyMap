@@ -22,7 +22,7 @@ export default {
       layout: [
         // eslint-disable-next-line standard/object-curly-even-spacing
         {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': 'testMap', 'mapDes': ''},
-        {'x': 2, 'y': 0, 'w': 1.5, 'h': 3, 'i': '1', 'mapName': '1', 'mapDes': ''}
+        {'x': 1.5, 'y': 0, 'w': 1.5, 'h': 3, 'i': '1', 'mapName': '1', 'mapDes': ''}
         // {'x': 2, 'y': 0, 'w': 1, 'h': 1, 'i': '2'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 1, 'i': '3'},
         // {'x': 4, 'y': 0, 'w': 1, 'h': 1, 'i': '4'},
@@ -39,10 +39,19 @@ export default {
   },
   methods: {
     showMapList: function () {
+      var that = this 
       var userName = this.userName
       this.$axios.post('/getMapList', qs.stringify({userName}
       )).then(function (response) {
         console.log(response.data)
+        for (var i = 0; i < response.data.length; i++) {
+          that.modelOfMap.x = 1.5*i
+          that.modelOfMap.y = that.modelOfMap.h * (i%10)
+          that.modelOfMap.mapDes = response.data[i].mapDescrpt
+          that.modelOfMap.mapName = response.data[i].mapName
+          that.modelOfMap.i = response.data[i].mapSetupDate
+          that.layout.push(that.modelOfMap)
+        }
       // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
         // this.$message('Map Save failedly')
