@@ -2,16 +2,13 @@ package com.spbweb.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.spbweb.entity.Mapdetail;
 import com.spbweb.entity.Storydetail;
 import com.spbweb.service.MapdetailService;
 import com.spbweb.service.StorydetailService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -66,21 +63,47 @@ public class MapController {
     }
 
     /**
-     * 待完成
-     * @param tempLay
-     * @return
+     * 需要把当前mapName传进来
+     * @param tempLay, mapName
+     * @return 0
      */
+    @Transactional
     @PostMapping("/api/saveMap")
     @ResponseBody
-    public int saveMap(@RequestParam String tempLay){
-        System.out.println(tempLay);
+    public int saveMap(@RequestParam String tempLay, @RequestParam String mapName){
+        Mapdetail m = mapdetailService.findMapByMapName(mapName);
+        int mapId = m.getMapId();
+
+        System.out.println("----------"+tempLay);
         JSONArray jsonArray = JSON.parseArray(tempLay);
         List<Map<String,Object>> mapListJson = (List)jsonArray;
+        long timestamp = new Date().getTime();
         for(Map card:mapListJson){
+
             if((int)card.get("flag")==-1){
                 continue;
             }
-            else if((int)card.get("flag")==0){
+            else {
+                Storydetail story = new Storydetail();
+                story.setStoryTitle((String)card.get("title"));
+                story.setColorPick((String)card.get("colorPick"));
+                story.setCoodX((double)card.get("x"));
+                story.setCoodY((double)card.get("y"));
+                story.setStoryDescription((String)card.get("des"));
+                //mapName或者mapId需要一个
+                story.setStoryId((int)card.get("i"));
+                story.setMapId(mapId);
+                story.setStoryLastModifiedDate(timestamp);
+
+                //新增card
+                if((int)card.get("flag")==0){
+                    story.setStorySetupDate(timestamp);
+                    storydetailService.insert(story);
+                }
+                //编辑card
+                else if((int)card.get("flag")==1){
+                    storydetailService.updateStoryByStoryId(story.getStoryId(),story);
+                }
 
             }
             System.out.println(card);
@@ -90,6 +113,11 @@ public class MapController {
         return 0;
     }
 
+    /**
+     * 根据map名获得card列表
+     * @param mapName
+     * @return 返回JSONArray格式的storydetails
+     */
     @PostMapping("/api/getBackendMap")
     @ResponseBody
     public String getMap(@RequestParam String mapName){

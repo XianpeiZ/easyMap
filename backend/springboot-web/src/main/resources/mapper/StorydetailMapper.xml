@@ -10,8 +10,8 @@
     <result column="map_id" jdbcType="INTEGER" property="mapId" />
     <result column="story_title" jdbcType="VARCHAR" property="storyTitle" />
     <result column="story_description" jdbcType="VARCHAR" property="storyDescription" />
-    <result column="story_setup_date" jdbcType="DATE" property="storySetupDate" />
-    <result column="story_last_modified_date" jdbcType="DATE" property="storyLastModifiedDate" />
+    <result column="story_setup_date" jdbcType="TIMESTAMP" property="storySetupDate" />
+    <result column="story_last_modified_date" jdbcType="TIMESTAMP" property="storyLastModifiedDate" />
     <result column="cood_x" jdbcType="DOUBLE" property="coodX" />
     <result column="cood_y" jdbcType="DOUBLE" property="coodY" />
     <result column="color_pick" jdbcType="VARCHAR" property="colorPick" />

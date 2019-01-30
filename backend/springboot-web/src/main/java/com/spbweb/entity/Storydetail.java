@@ -47,7 +47,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    private Date storySetupDate;
+    private long storySetupDate;
 
     /**
      *
@@ -56,7 +56,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    private Date storyLastModifiedDate;
+    private long storyLastModifiedDate;
 
     /**
      *
@@ -194,7 +194,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public Date getStorySetupDate() {
+    public long getStorySetupDate() {
         return storySetupDate;
     }
 
@@ -206,7 +206,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setStorySetupDate(Date storySetupDate) {
+    public void setStorySetupDate(long storySetupDate) {
         this.storySetupDate = storySetupDate;
     }
 
@@ -218,7 +218,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public Date getStoryLastModifiedDate() {
+    public long getStoryLastModifiedDate() {
         return storyLastModifiedDate;
     }
 
@@ -230,7 +230,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setStoryLastModifiedDate(Date storyLastModifiedDate) {
+    public void setStoryLastModifiedDate(long storyLastModifiedDate) {
         this.storyLastModifiedDate = storyLastModifiedDate;
     }
 
