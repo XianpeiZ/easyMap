@@ -71,6 +71,10 @@ export default {
         resource: '',
         desc: ''
       },
+      currentcard: {
+        title: '',
+        des: ''
+      },
       formLabelWidth: '80px',
       colorPick: '#ffffff',
       comments: []
@@ -155,8 +159,10 @@ export default {
       let tempLay = JSON.stringify(this.layout1)
       console.log(tempLay)
       console.log(typeof (tempLay))
+      let mapName = this.map.name
+      console.log(mapName)
       // tempLay = JSON.parse(JSON.stringify(this.layout1))
-      this.$axios.post('/saveMap', qs.stringify({tempLay}
+      this.$axios.post('/saveMap', qs.stringify({tempLay, mapName}
       )).then(function (response) {
         if (response.data) {
           // this.$$message(' Map Save successfully')
@@ -215,6 +221,8 @@ export default {
     showEditDialogFormVisible: function (index) {
       this.editDialogFormVisible = true
       this.currentItem = index
+      this.currentcard.title = this.layout1[index].title
+      this.currentcard.des = this.layout1[index].des
     },
 
     judgeItemPosition: function (newX, newY) {

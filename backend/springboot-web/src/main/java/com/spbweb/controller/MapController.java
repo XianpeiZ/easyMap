@@ -70,7 +70,7 @@ public class MapController {
     @PostMapping("/api/saveMap")
     @ResponseBody
     public int saveMap(@RequestParam String tempLay, @RequestParam String mapName){
-        Mapdetail m = mapdetailService.findMapByMapName(mapName);
+    	Mapdetail m = mapdetailService.findMapByMapName(mapName);
         int mapId = m.getMapId();
 
         JSONArray jsonArray = JSON.parseArray(tempLay);

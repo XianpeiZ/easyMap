@@ -87,6 +87,14 @@
           <!--编辑备注卡片信息-->
          <span class="editdialog">
                 <el-dialog title="card" :visible.sync="editDialogFormVisible ">
+                  <el-form :model="currentcard" class="editcard">
+                    <el-form-item label="name" :label-width="formLabelWidth">
+                     <el-input v-model="currentcard.title" autocomplete="off"></el-input>
+                  </el-form-item>
+                <el-form-item label="description" :label-width="formLabelWidth">
+                   <el-input v-model="currentcard.des" autocomplete="off"></el-input>
+                  </el-form-item>
+               </el-form>
                   <div class="colorPick1">
                     <el-button  @click.native="editColorPick1(index)" size="small" :style="{background:'#FE8A8B'}"  circle> </el-button>
                   </div>
