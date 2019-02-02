@@ -20,13 +20,6 @@
                     <el-menu   class="el-menu-demo"
                              mode="horizontal" unique-opened router>
                         <!-- v-if='!item.hidden && (($store.state.user.userinfo.access_status===1 && $store.state.user.userinfo.web_routers[item.path]) || $store.state.user.userinfo.access_status!==1)' -->
-                        <el-menu-item
-                                v-for='(item) in $router.options.routes'
-                                :index="item.path"
-                                :key='item.path'
-                                >
-                            {{item.name}}<!-- {{item.path}} -->
-                        </el-menu-item>
                     </el-menu>
                 </el-col>
                 <el-col :span="4" class="userinfo">

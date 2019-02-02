@@ -336,7 +336,14 @@ export default {
         }
       }
     },
-
+    editAll: function () {
+      this.editDialogFormVisible = false
+      this.layout1[this.currentItem].title = this.currentcard.title
+      this.layout1[this.currentItem].des = this.currentcard.des
+      this.layout1[this.currentItem].flag = 1
+      this.currentcard.title = ''
+      this.currentcard.des = ''
+    },
     rowAddItem: function (index) {
       console.log(this.layout1)
       // 如果是第一行
@@ -354,6 +361,8 @@ export default {
         tempCard.x = x
         tempCard.y = y
         tempCard.i = id
+        tempCard.title = ''
+        tempCard.des = ''
         tempCard.flag = 0
         this.layout1.push(tempCard)
         this.historyLayout1.push(tempCard)
@@ -375,6 +384,8 @@ export default {
         tempCard.x = x
         tempCard.y = y
         tempCard.i = id
+        tempCard.title = ''
+        tempCard.des = ''
         tempCard.flag = 0
         this.layout1.push(tempCard)
         this.historyLayout1.push(tempCard)
@@ -396,6 +407,8 @@ export default {
       tempCard.x = x
       tempCard.y = y
       tempCard.i = id
+      tempCard.title = ''
+      tempCard.des = ''
       tempCard.flag = 0
       this.layout1.push(tempCard)
       this.historyLayout1.push(tempCard)
