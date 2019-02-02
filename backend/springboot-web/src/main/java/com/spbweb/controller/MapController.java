@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +40,7 @@ public class MapController {
             Mapdetail mapdetail = new Mapdetail();
             mapdetail.setMapName(newMapName);
             mapdetail.setMapOwner("zhangsan");
-            mapdetail.setMapSetupDate(new Date().getTime());
+            mapdetail.setMapSetupDate(new Timestamp(new Date().getTime()));
             mapdetail.setMapDescrpt(newMapDesc);
             this.mapdetailService.insert(mapdetail);
             return "ok";
@@ -73,7 +75,7 @@ public class MapController {
 
         JSONArray jsonArray = JSON.parseArray(tempLay);
         List<Map<String,Object>> mapListJson = (List)jsonArray;
-        long timestamp = new Date().getTime();
+        Timestamp timestamp = new Timestamp(new Date().getTime());
         for(Map card:mapListJson){
 
             if((int)card.get("flag")!=-1) {

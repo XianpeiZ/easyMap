@@ -1,6 +1,7 @@
 package com.spbweb.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Storydetail implements Serializable {
@@ -47,7 +48,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    private long storySetupDate;
+    private Timestamp storySetupDate;
 
     /**
      *
@@ -56,7 +57,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    private long storyLastModifiedDate;
+    private Timestamp storyLastModifiedDate;
 
     /**
      *
@@ -194,7 +195,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public long getStorySetupDate() {
+    public Timestamp getStorySetupDate() {
         return storySetupDate;
     }
 
@@ -206,7 +207,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setStorySetupDate(long storySetupDate) {
+    public void setStorySetupDate(Timestamp storySetupDate) {
         this.storySetupDate = storySetupDate;
     }
 
@@ -218,7 +219,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public long getStoryLastModifiedDate() {
+    public Timestamp getStoryLastModifiedDate() {
         return storyLastModifiedDate;
     }
 
@@ -230,7 +231,7 @@ public class Storydetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setStoryLastModifiedDate(long storyLastModifiedDate) {
+    public void setStoryLastModifiedDate(Timestamp storyLastModifiedDate) {
         this.storyLastModifiedDate = storyLastModifiedDate;
     }
 

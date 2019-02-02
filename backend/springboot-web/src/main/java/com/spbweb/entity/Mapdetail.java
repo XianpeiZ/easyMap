@@ -1,6 +1,8 @@
 package com.spbweb.entity;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Mapdetail implements Serializable {
@@ -38,7 +40,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    private long mapSetupDate;
+    private Timestamp mapSetupDate;
 
     private String mapDescrpt;
 
@@ -131,7 +133,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    public long getMapSetupDate() {
+    public Timestamp getMapSetupDate() {
         return mapSetupDate;
     }
 
@@ -143,7 +145,7 @@ public class Mapdetail implements Serializable {
      *
      * @mbg.generated
      */
-    public void setMapSetupDate(long mapSetupDate) {
+    public void setMapSetupDate(Timestamp mapSetupDate) {
         this.mapSetupDate = mapSetupDate;
     }
 
