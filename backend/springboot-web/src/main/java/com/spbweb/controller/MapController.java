@@ -70,7 +70,10 @@ public class MapController {
     @PostMapping("/api/saveMap")
     @ResponseBody
     public int saveMap(@RequestParam String tempLay, @RequestParam String mapName){
+        System.out.println(tempLay);
+        System.out.println(mapName);
     	Mapdetail m = mapdetailService.findMapByMapName(mapName);
+    	System.out.println(m.getMapId());
         int mapId = m.getMapId();
 
         JSONArray jsonArray = JSON.parseArray(tempLay);
@@ -82,8 +85,8 @@ public class MapController {
                 Storydetail story = new Storydetail();
                 story.setStoryTitle((String)card.get("title"));
                 story.setColorPick((String)card.get("colorPick"));
-                story.setCoodX((double)card.get("x"));
-                story.setCoodY((double)card.get("y"));
+                story.setCoodX(Double.valueOf(card.get("x").toString()));
+                story.setCoodY(Double.valueOf(card.get("y").toString()));
                 story.setStoryDescription((String)card.get("des"));
                 //mapName或者mapId需要一个
                 story.setStoryId((int)card.get("i"));
@@ -91,12 +94,12 @@ public class MapController {
                 story.setStoryLastModifiedDate(timestamp);
 
                 //新增card
-                if((int)card.get("flag")==0){
+                if((int)card.get("flag")==1){
                     story.setStorySetupDate(timestamp);
                     storydetailService.insert(story);
                 }
                 //编辑card
-                else if((int)card.get("flag")==1){
+                else if((int)card.get("flag")==0){
                     storydetailService.updateStoryByStoryId(story.getStoryId(),story);
                 }
 
