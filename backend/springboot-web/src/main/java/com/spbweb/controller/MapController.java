@@ -44,7 +44,6 @@ public class MapController {
             return "ok";
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
         }
 
         return "something error";
@@ -57,9 +56,7 @@ public class MapController {
     @PostMapping("/api/deleteMap")
     @ResponseBody
     public int deleteMap(@RequestParam String mapName){
-        System.out.println(mapName);
-        int res = mapdetailService.deleteMapByMapName(mapName);
-        return res;
+        return mapdetailService.deleteMapByMapName(mapName);
     }
 
     /**
@@ -74,16 +71,12 @@ public class MapController {
         Mapdetail m = mapdetailService.findMapByMapName(mapName);
         int mapId = m.getMapId();
 
-        System.out.println("----------"+tempLay);
         JSONArray jsonArray = JSON.parseArray(tempLay);
         List<Map<String,Object>> mapListJson = (List)jsonArray;
         long timestamp = new Date().getTime();
         for(Map card:mapListJson){
 
-            if((int)card.get("flag")==-1){
-                continue;
-            }
-            else {
+            if((int)card.get("flag")!=-1) {
                 Storydetail story = new Storydetail();
                 story.setStoryTitle((String)card.get("title"));
                 story.setColorPick((String)card.get("colorPick"));
@@ -106,8 +99,6 @@ public class MapController {
                 }
 
             }
-            System.out.println(card);
-            System.out.println(card.get("flag"));
         }
 
         return 0;
@@ -123,23 +114,16 @@ public class MapController {
     public String getMap(@RequestParam String mapName){
         Mapdetail m = mapdetailService.findMapByMapName(mapName);
         int mapId = m.getMapId();
-        System.out.println(mapId);
         ArrayList<Storydetail> res = storydetailService.selectAll(mapId);
-        System.out.println(res);
-        String re = JSON.toJSONString(res);
-        System.out.println(re);
-        return re;
+        return JSON.toJSONString(res);
     }
     
     // 获取user的所有map
     @PostMapping("/api/getMapList")
     @ResponseBody
     public Object getMapList(@RequestParam String userName){
-    	System.out.println(userName);
         ArrayList<Mapdetail> res = mapdetailService.findMapByMapOwner(userName);
-        String re = JSON.toJSONString(res);
-        System.out.println(re);
-    	return re;
+        return JSON.toJSONString(res);
         
     }
 

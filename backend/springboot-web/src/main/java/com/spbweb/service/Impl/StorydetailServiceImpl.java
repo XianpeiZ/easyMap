@@ -17,42 +17,33 @@ public class StorydetailServiceImpl implements StorydetailService
     @Override
     public Storydetail findStoryByStoryId (Integer storyId)
     {
-        Storydetail storydetail = storydetailMapper.findStoryByStoryId (storyId);
-        return storydetail;
+        return storydetailMapper.findStoryByStoryId (storyId);
     }
 
 
     @Override
     public ArrayList<Storydetail> selectAll (Integer mapId)
     {
-        ArrayList<Storydetail> temp;
-        temp = storydetailMapper.selectAll(mapId);
-        return temp;
+        return storydetailMapper.selectAll(mapId);
     }
 
 
     @Override
     public int insert (Storydetail record)
     {
-        int ret;
-        ret = storydetailMapper.insert( record );
-        return ret;
+        return storydetailMapper.insert( record );
     }
 
     @Override
     public int deleteStoryByStoryId (Integer storyId)
     {
-        int ret;
-        ret = storydetailMapper.deleteStoryByStoryId( storyId );
-        return  ret;
+        return storydetailMapper.deleteStoryByStoryId( storyId );
     }
 
     @Override
     public int updateStoryByStoryId(Integer storyId , Storydetail record)
     {
         record.setStoryId( storyId );
-        int ret;
-        ret = storydetailMapper.updateStoryByStoryId( storyId , record );
-        return ret;
+        return storydetailMapper.updateStoryByStoryId( storyId , record );
     }
 }

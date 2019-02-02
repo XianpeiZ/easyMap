@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @Service
 public class MapdetailServiceImpl implements MapdetailService
@@ -18,50 +17,39 @@ public class MapdetailServiceImpl implements MapdetailService
     @Override
     public Mapdetail findMapByMapId (Integer mapId)
     {
-        Mapdetail mapdetail = mapdetailMapper.findMapByMapId( mapId );
-        return mapdetail;
+        return mapdetailMapper.findMapByMapId( mapId );
     }
 
     @Override
     public ArrayList<Mapdetail> selectAll ()
     {
-        ArrayList<Mapdetail> temp;
-        temp = mapdetailMapper.selectAll();
-        return temp;
+        return mapdetailMapper.selectAll();
     }
 
     @Override
     public int deleteMapByMapId (Integer mapId)
     {
-        int ret;
-        ret = mapdetailMapper.deleteMapByMapId( mapId );
-        return ret;
+        return mapdetailMapper.deleteMapByMapId( mapId );
     }
 
     @Override
     public int deleteMapByMapName (String mapName){
-        int res;
-        res = mapdetailMapper.deleteMapByMapName(mapName);
-        return res;
+        return mapdetailMapper.deleteMapByMapName(mapName);
     }
 
     @Override
     public int insert(Mapdetail mapdetail){
-        int res;
-        res = mapdetailMapper.insert(mapdetail);
-        return res;
+        return mapdetailMapper.insert(mapdetail);
     }
 
     @Override
     public Mapdetail findMapByMapName(String mapName){
-        Mapdetail res = mapdetailMapper.findMapByMapName(mapName);
-        return res;
+        return mapdetailMapper.findMapByMapName(mapName);
     }
 
     @Override
     public ArrayList<Mapdetail> findMapByMapOwner(String userName){
-        ArrayList<Mapdetail> res = mapdetailMapper.findMapByMapOwner(userName);
-        return res;
+        return mapdetailMapper.findMapByMapOwner(userName);
     }
     
 }
