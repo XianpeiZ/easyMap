@@ -3,11 +3,13 @@ import Vue from 'vue'
 // import $ from 'jquery'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
+import headnav from '../layout/head-nav.vue'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
 Vue.prototype.$axios = axios
 export default {
   components: {
+    headnav,
     GridLayout,
     GridItem
   },
@@ -39,14 +41,14 @@ export default {
   },
   methods: {
     showMapList: function () {
-      var that = this 
+      var that = this
       var userName = this.userName
       this.$axios.post('/getMapList', qs.stringify({userName}
       )).then(function (response) {
         console.log(response.data)
         for (var i = 0; i < response.data.length; i++) {
-          that.modelOfMap.x = 1.5*i
-          that.modelOfMap.y = that.modelOfMap.h * (i%10)
+          that.modelOfMap.x = 1.5 * i
+          that.modelOfMap.y = that.modelOfMap.h * (i % 10)
           that.modelOfMap.mapDes = response.data[i].mapDescrpt
           that.modelOfMap.mapName = response.data[i].mapName
           that.modelOfMap.i = response.data[i].mapSetupDate

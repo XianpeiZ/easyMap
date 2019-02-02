@@ -1,4 +1,6 @@
 <template>
+<div class="home">
+  <headnav> </headnav>
   <div class="dash">
     <el-button :plain="true" type="info" @click.native="newMapDialogVisible = true"><i
                 class="el-icon-plus el-icon--left"></i> New Map
@@ -56,6 +58,7 @@
         </grid-layout>
       </div>
     </div>
+</div>
 </template>
 
 <script>

@@ -3,6 +3,7 @@ import Vue from 'vue'
 // import $ from 'jquery'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
+import headnav from '../layout/head-nav.vue'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
 Vue.prototype.$axios = axios
@@ -80,6 +81,7 @@ export default {
     this.getBackendMap()
   },
   components: {
+    headnav,
     GridLayout,
     GridItem
   },

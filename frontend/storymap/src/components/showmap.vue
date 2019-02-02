@@ -7,6 +7,7 @@
                           </el-row>
                         </el-col>
                         <el-col :span="21" class="right-menu"> -->
+    <headnav> </headnav>
     <div class="dash">
       <div>
         <el-row>
