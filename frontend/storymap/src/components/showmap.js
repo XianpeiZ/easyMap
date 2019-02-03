@@ -139,6 +139,7 @@ export default {
           that.layout1[i].title = response.data[i].storyTitle
           that.layout1[i].des = response.data[i].storyDescription
           that.layout1[i].i = response.data[i].storyId
+          that.layout1[i].flag = -1
         }
         console.log(that.layout1)
         // for(var i = 0 ;i <response.data.size())

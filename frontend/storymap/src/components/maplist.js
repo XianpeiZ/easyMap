@@ -23,8 +23,8 @@ export default {
       modelOfMap: {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': '123', 'mapDes': ''},
       layout: [
         // eslint-disable-next-line standard/object-curly-even-spacing
-        {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': 'testMap', 'mapDes': ''},
-        {'x': 1.5, 'y': 0, 'w': 1.5, 'h': 3, 'i': '1', 'mapName': '1', 'mapDes': ''}
+        // {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': 'testMap', 'mapDes': ''},
+        // {'x': 1.5, 'y': 0, 'w': 1.5, 'h': 3, 'i': '1', 'mapName': '1', 'mapDes': ''}
         // {'x': 2, 'y': 0, 'w': 1, 'h': 1, 'i': '2'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 1, 'i': '3'},
         // {'x': 4, 'y': 0, 'w': 1, 'h': 1, 'i': '4'},
@@ -48,7 +48,7 @@ export default {
         console.log(response.data)
         for (var i = 0; i < response.data.length; i++) {
           that.modelOfMap.x = 1.5 * i
-          that.modelOfMap.y = that.modelOfMap.h * (i % 10)
+          that.modelOfMap.y = 4 * (i % 10)
           that.modelOfMap.mapDes = response.data[i].mapDescrpt
           that.modelOfMap.mapName = response.data[i].mapName
           that.modelOfMap.i = response.data[i].mapSetupDate
