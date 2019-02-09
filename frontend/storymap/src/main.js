@@ -22,7 +22,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 // Vue.component(VPagination.name, VPagination)
 // const EventBus = new Vue();
 // Vue.use(router)
-axios.defaults.baseURL="http://47.100.22.169:8000/api"
+axios.defaults.baseURL="http://localhost:8000/api"
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.use(vueGridLayout)
