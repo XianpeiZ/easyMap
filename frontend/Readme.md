@@ -18,15 +18,15 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 ## 问题解决（1.19 by Terry）
 
 ### 1.解决：Invalid character found in method name. HTTP method names must be tokens
- 
+
 	1.1 前端config 配置 target 网址 
-
+	
 	2.1 tomcat serve 增加maxHttpHeaderSize字段 8192
-
+	
 	3.1 https和http 要统一
- 
+
 ### 2.Required String parameter 'newMapDesc' is not present
- 
+
   	2.1.参数要匹配
 
 
@@ -34,8 +34,8 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 
 	3.1 前端config index.js 要配置target 网址  通过url的方式进行数据传递
   	3.2 前端要用到axios 和qs包 （注 qs.stringfy()里边要加{}）
-    3.3 后端还需要跨域配置 不知道有没有有用  先加上再说假如不好使的话
-	
+​    3.3 后端还需要跨域配置 不知道有没有有用  先加上再说假如不好使的话
+​	
 	@Configuration
 	public class CORSConfig implements WebMvcConfigurer {
 	    @Override
@@ -55,16 +55,16 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
 
 ### 1.Failed to mount component: template or render function not defined.
 	1.1 http://www.jianshu.com/p/4d61f71de95a
-    router 文件 中 component 和components  的问题
-	
+	router 文件 中 component 和components  的问题
+
 ### 2.Uncaught (in promise) TypeError: Cannot read property 'protocol' of undefined
 	2.1 https://blog.csdn.net/weixin_42470791/article/details/82936957
-    ok 到这部错误是全部都消除了，但是页面没东西。。。。。
+	ok 到这部错误是全部都消除了，但是页面没东西。。。。。
 ### 3 ok 最后找见bug 了 
     3.1
  	import showmap from '../components/showmap'  
-    import showmap from '../components/showmap.vue'
-    默认import js 文件 需要加上.vue 表示很呵呵，浪费了不少时间 
+​    import showmap from '../components/showmap.vue'
+​    默认import js 文件 需要加上.vue 表示很呵呵，浪费了不少时间 
 ### 4 关于this.$axios 中作用域问题
    	 可以增加这句话 let that = this 来解决
 ### 5 关于vue 数组和jsonarray 之间的转化问题
@@ -73,11 +73,24 @@ release 的解决方法考虑是放入layout中和card 区分开，依旧放入�
     navicat 输入 连接的IP 端口号3306 以及用户名和密码 
 ### 7 vue 页面跳转传参数的小坑
     router.push() 里边 把path 换成name 就传成功了 
-	
-	即：{name:'页面的名字'，params：{参数名：参数值}}
     
-	获取页面通过 router.params.参数名就可以获取了 
+    即：{name:'页面的名字'，params：{参数名：参数值}}
+    
+    获取页面通过 router.params.参数名就可以获取了 
 ### 8 考虑页面回退缓存问题 以及好多细节问题 ，对页面进行美化
-	 
-      
+
+​      
+
+## 一个小提示(2.9 by zxp)
+
+每次build的时候，目标文件的名字都会变化。
+
+push的时候先将远程仓库的dist删掉，再把新文件push上去。
+
+```
+git rm -r --cached frontend/storymap/dist/
+git add . 
+git commit . -m "将新dist文件添加进来"
+git push
+```
 
