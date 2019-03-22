@@ -3,6 +3,7 @@ package com.spbweb;
 import com.spbweb.dao.MapdetailMapper;
 import com.spbweb.dao.StorydetailMapper;
 import com.spbweb.entity.Mapdetail;
+import com.spbweb.entity.Storydetail;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,23 @@ public class StoryDetailTests
     @Autowired
     private StorydetailMapper storydetailMapper;
 
+    @Test
+    public void insertTest()
+    {
+        Timestamp timestamp = new Timestamp( new Date().getTime() );
+        Storydetail storydetail = new Storydetail();
+        storydetail.setMapId( 48 );
+        storydetail.setStoryTitle( "abc" );
+        storydetail.setStoryDescription( "story detail test" );
+        storydetail.setStorySetupDate( timestamp );
+        storydetail.setStoryLastModifiedDate( timestamp );
+        storydetail.setCoodX( 1.0 );
+        storydetail.setCoodY( 1.0 );
+        storydetail.setColorPick( "RED" );
+        storydetail.setComments( "no comments" );
+        int result = storydetailMapper.insert( storydetail );
+        Assert.assertEquals( 1,result );
+    }
 
 }
 
