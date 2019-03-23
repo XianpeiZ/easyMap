@@ -12,6 +12,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import vueKanban from 'vue-kanban'
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+
+import './style/theme.css'
+import './style/characters.css'
 // // 引入样式
 // import 'vue-easytable/libs/themes-base/index.css'
 // // 导入 table 和 分页组件

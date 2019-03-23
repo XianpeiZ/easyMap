@@ -15,7 +15,7 @@ export default {
   },
   data: function () {
     return {
-      userName: 'zhangsan',
+      currentUser: 'zhangsan',
       newMapDesc: '',
       newMapName: '',
       formLabelWidth: '80px',
@@ -42,7 +42,7 @@ export default {
   methods: {
     showMapList: function () {
       var that = this
-      var userName = this.userName
+      var userName = this.currentUser
       this.$axios.post('/getMapList', qs.stringify({userName}
       )).then(function (response) {
         console.log(response.data)
