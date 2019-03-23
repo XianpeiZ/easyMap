@@ -30,5 +30,5 @@ public interface StorydetailMapper {
 
     int deleteStoryByStoryId(Integer storyId);
 
-    int updateStoryByStoryId(Integer storyId , Storydetail record);
+    int updateStoryByStoryId(Storydetail record);
 }

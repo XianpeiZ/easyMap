@@ -99,7 +99,7 @@ public class MapController {
                 }
                 //编辑card
                 else if((int)card.get("flag")==0){
-                    storydetailService.updateStoryByStoryId(story.getStoryId(),story);
+                    storydetailService.updateStoryByStoryId(story);
                 }
 
             }

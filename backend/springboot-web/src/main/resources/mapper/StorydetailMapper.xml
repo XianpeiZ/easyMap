@@ -52,13 +52,13 @@
   <delete id="deleteStoryByStoryId">
     delete 
     from storyDetail 
-    where story_id=#{storyId}
+    where story_id=#{storyId,jdbcType=INTEGER}
   </delete>
   <update id="updateStoryByStoryId" parameterType="com.spbweb.entity.Storydetail">
     update storyDetail
     set map_id=#{mapId,jdbcType=INTEGER} , story_title=#{storyTitle,jdbcType=VARCHAR} , story_description=#{storyDescription,jdbcType=VARCHAR} ,
     story_last_modified_date=#{storyLastModifiedDate,jdbcType=TIMESTAMP} , cood_x=#{coodX,jdbcType=DOUBLE} , cood_y=#{coodY,jdbcType=DOUBLE},
-    color_pick=#{colorPick,jdbcType=VARCHAR}, comments=#{comments,jdbcType=VARCHAR})
-    where story_id=#{storyId}
+    color_pick=#{colorPick,jdbcType=VARCHAR}, comments=#{comments,jdbcType=VARCHAR}
+    where story_id=#{storyId,jdbcType=INTEGER}
   </update>
 </mapper>

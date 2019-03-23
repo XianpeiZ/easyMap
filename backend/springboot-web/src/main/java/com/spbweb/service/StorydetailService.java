@@ -12,5 +12,5 @@ public interface StorydetailService
     ArrayList<Storydetail> selectAll (Integer mapId);
     int insert (Storydetail record);
     int deleteStoryByStoryId (Integer storyId);
-    int updateStoryByStoryId (Integer storyId , Storydetail record);
+    int updateStoryByStoryId (Storydetail record);
 }
