@@ -30,12 +30,14 @@ public class MapDetailTests
     {
         Timestamp timestamp = new Timestamp( new Date().getTime() );
         Mapdetail mapdetail = new Mapdetail();
+
         mapdetail.setMapId( 1 );
         mapdetail.setMapName( "abc" );
         mapdetail.setMapOwner( "springbootTest" );
         mapdetail.setMapSetupDate( timestamp );
         mapdetail.setMapDescrpt( "test transaction" );
         int result = mapdetailMapper.insert( mapdetail );
+
 //        System.out.println( "insert test result : " + result );
         Assert.assertEquals( 1 , result );
     }
@@ -46,15 +48,19 @@ public class MapDetailTests
     {
         Timestamp timestamp = new Timestamp( new Date().getTime() );
         Mapdetail mapdetail = new Mapdetail();
+        Mapdetail getMapdetail;
+
         mapdetail.setMapName( "abc" );
         mapdetail.setMapOwner( "springbootTest" );
         mapdetail.setMapSetupDate( timestamp );
         mapdetail.setMapDescrpt( "test transaction" );
         mapdetailMapper.insert( mapdetail );
+
         System.out.println( mapdetail.toString() );
         String mapName = "abc";
-        Mapdetail getMapdetail = mapdetailMapper.findMapByMapName( mapName );
+        getMapdetail = mapdetailMapper.findMapByMapName( mapName );
         System.out.println( getMapdetail.toString() );
+
         Assert.assertEquals( mapdetail.getMapName() , getMapdetail.getMapName() );
         Assert.assertEquals( mapdetail.getMapOwner() , getMapdetail.getMapOwner() );
         Assert.assertEquals( mapdetail.getMapDescrpt() , getMapdetail.getMapDescrpt() );
@@ -64,24 +70,29 @@ public class MapDetailTests
     public void selectAllTest()
     {
         ArrayList<Mapdetail> lastMapDetailArrayList = mapdetailMapper.selectAll();
+        ArrayList<Mapdetail> mapdetailArrayList;
         Timestamp timestamp = new Timestamp( new Date().getTime() );
         Mapdetail mapdetail = new Mapdetail();
+        Mapdetail mapdetail1 = new Mapdetail();
+
         mapdetail.setMapName( "abc" );
         mapdetail.setMapOwner( "springbootTest" );
         mapdetail.setMapSetupDate( timestamp );
         mapdetail.setMapDescrpt( "test transaction" );
-        Mapdetail mapdetail1 = new Mapdetail();
+        mapdetailMapper.insert( mapdetail );
+
         mapdetail1.setMapName( "def" );
         mapdetail1.setMapOwner( "sprintbootTest" );
         mapdetail1.setMapSetupDate( timestamp );
         mapdetail1.setMapDescrpt( "test transaction" );
-        mapdetailMapper.insert( mapdetail );
         mapdetailMapper.insert( mapdetail1 );
-        ArrayList<Mapdetail> mapdetailArrayList = mapdetailMapper.selectAll();
+
+        mapdetailArrayList = mapdetailMapper.selectAll();
 //        for ( int i = 0 ; i < mapdetailArrayList.size() ; i++ )
 //        {
 //            System.out.println( mapdetailArrayList.get( i ).toString() );
 //        }
+
         Assert.assertEquals( lastMapDetailArrayList.size() + 2 , mapdetailArrayList.size() );
         Assert.assertEquals( "abc" , mapdetailArrayList.get( mapdetailArrayList.size() - 2 ).getMapName() );
         Assert.assertEquals( "def" , mapdetailArrayList.get( mapdetailArrayList.size() - 1 ).getMapName() );
@@ -93,14 +104,17 @@ public class MapDetailTests
     {
         Timestamp timestamp = new Timestamp( new Date().getTime() );
         Mapdetail mapdetail = new Mapdetail();
+
         mapdetail.setMapName( "abc" );
         mapdetail.setMapOwner( "springbootTest" );
         mapdetail.setMapSetupDate( timestamp );
         mapdetail.setMapDescrpt( "test transaction" );
         mapdetailMapper.insert( mapdetail );
+
 //        System.out.println( mapdetail.toString() );
         String mapName = "abc";
         int result = mapdetailMapper.deleteMapByMapName( mapName );
+
         Assert.assertEquals( 1 , result );
     }
 }
