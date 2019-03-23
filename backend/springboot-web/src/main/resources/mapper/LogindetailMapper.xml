@@ -32,4 +32,17 @@
     select user_id, user_name, user_passwd, user_role
     from loginDetail
   </select>
+
+  <select id="selectByNameAndPasswd" resultMap="BaseResultMap">
+    select user_id, user_name, user_passwd, user_role
+    from loginDetail
+    where user_name=#{arg0} and user_passwd=#{arg1}
+  </select>
+
+  <delete id="delectUserByName" parameterType="java.lang.String" >
+    delete
+    from loginDetail
+    where user_name=#{userName,jdbcType=VARCHAR}
+  </delete>
+
 </mapper>
