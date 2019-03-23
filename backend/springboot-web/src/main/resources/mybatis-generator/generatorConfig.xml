@@ -49,5 +49,14 @@
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="map_id" sqlStatement="Mysql" identity="true" />
         </table>
+        <table schema="easyMap" tableName="loginDetail"
+        enableCountByExample="false"
+        enableUpdateByExample="false"
+        enableDeleteByExample="false"
+        enableSelectByExample="false"
+        selectByExampleQueryId="false">
+        <property name="useActualColumnNames" value="false" />
+        <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+        </table>
     </context>
 </generatorConfiguration>
