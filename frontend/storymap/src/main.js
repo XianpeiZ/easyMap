@@ -12,6 +12,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import vueKanban from 'vue-kanban'
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+import htmlToPdf from './components/utils/htmlToPdf'
 
 import './style/theme.css'
 import './style/characters.css'
@@ -25,8 +26,9 @@ import './style/characters.css'
 // Vue.component(VPagination.name, VPagination)
 // const EventBus = new Vue();
 // Vue.use(router)
-// axios.defaults.baseURL="http://47.100.22.169:8000/api"
-axios.defaults.baseURL="http://localhost:8000/api"
+axios.defaults.baseURL="http://47.100.22.169:8000/api"
+Vue.use(htmlToPdf)
+// axios.defaults.baseURL="http://localhost:8000/api"
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.use(vueGridLayout)

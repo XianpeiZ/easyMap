@@ -4,6 +4,8 @@ import Vue from 'vue'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 import headnav from '../layout/head-nav.vue'
+import html2canvas from 'html2canvas'
+// import jsPDF from 'jspdf'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
 Vue.prototype.$axios = axios
@@ -11,6 +13,7 @@ Vue.prototype.$axios = axios
 export default {
   data () {
     return {
+      htmlTitle: '页面导出PDF文件名',
       newMapName: '',
       currentItem: '',
       cardWidth: 1,
@@ -122,7 +125,7 @@ export default {
     },
 
     // ————————————————————————————————————————————————————————————————————————————————
-    // MAP的增删改查
+    // MAP的增删改查 以及导出
     // 从后端获取MAP信息
     getBackendMap: function () {
       var that = this
@@ -204,6 +207,39 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+
+    pdfExport: function () {
+      // eslint-disable-next-line no-undef
+      console.log('导出PDF')
+      this.getPdf('storyMap', name)
+    },
+    savecanvas: function () {
+      let canvas = document.querySelector('.canvas')
+      let that = this
+      html2canvas(canvas, {scale: 2, logging: false, useCORS: true}).then(function (canvas) {
+        let type = 'png'
+        let imgData = canvas.toDataURL(type)
+        // 照片格式处理
+        let _fixType = function (type) {
+          type = type.toLowerCase().replace(/jpg/i, 'jpeg')
+          let r = type.match(/png|jpeg|bmp|gif/)[0]
+          return 'image/' + r
+        }
+        imgData = imgData.replace(_fixType(type), 'image/octet-stream')
+        let filename = 'UUSound' + '.' + type
+        that.saveFile(imgData, filename)
+      })
+    },
+    saveFile (data, filename) {
+      // eslint-disable-next-line camelcase
+      let save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a')
+      save_link.href = data
+      save_link.download = filename
+
+      let event = document.createEvent('MouseEvents')
+      event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+      save_link.dispatchEvent(event)
     },
 
     // ——————————————————————————————————————————————————————————————————————————
