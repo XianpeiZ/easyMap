@@ -4,6 +4,7 @@ import Vue from 'vue'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 import headnav from '../layout/head-nav.vue'
+// import { type } from 'os';
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
 Vue.prototype.$axios = axios
@@ -20,7 +21,7 @@ export default {
       newMapName: '',
       formLabelWidth: '80px',
       newMapDialogVisible: false,
-      modelOfMap: {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': '123', 'mapDes': ''},
+      modelOfMap: {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': 0, 'mapName': '123', 'mapDes': ''},
       layout: [
         // eslint-disable-next-line standard/object-curly-even-spacing
         // {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': '0', 'mapName': 'testMap', 'mapDes': ''},
@@ -46,14 +47,17 @@ export default {
       this.$axios.post('/getMapList', qs.stringify({userName}
       )).then(function (response) {
         console.log(response.data)
-        for (var i = 0; i < response.data.length; i++) {
-          that.modelOfMap.x = 1.5 * i
-          that.modelOfMap.y = 4 * (i % 10)
-          that.modelOfMap.mapDes = response.data[i].mapDescrpt
-          that.modelOfMap.mapName = response.data[i].mapName
-          that.modelOfMap.i = response.data[i].mapSetupDate
-          that.layout.push(that.modelOfMap)
+        for (var j = 0; j < response.data.length; j++) {
+          var modelOfMap = {'x': 0, 'y': 0, 'w': 1.5, 'h': 3, 'i': 0, 'mapName': '123', 'mapDes': ''}
+          modelOfMap.x = 1.5 * j
+          modelOfMap.y = 4 * parseInt(j / 10)
+          modelOfMap.mapDes = response.data[j].mapDescrpt
+          modelOfMap.mapName = response.data[j].mapName
+          modelOfMap.i = response.data[j].mapSetupDate
+          // eslint-disable-next-line no-undef
+          that.layout.push(modelOfMap)
         }
+        console.log(that.layout)
       // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
         // this.$message('Map Save failedly')
