@@ -94,3 +94,14 @@ git commit . -m "将新dist文件添加进来"
 git push
 ```
 
+----
+## 前端的PNG和PDF导出（3.24 by Terry）
+PDF借鉴
+[https://segmentfault.com/a/1190000015820792](https://segmentfault.com/a/1190000015820792)
+
+使用的是html2canvas 和 jspdf
+
+PNG
+[https://www.jianshu.com/p/8c5f3b4548ea](https://www.jianshu.com/p/8c5f3b4548ea)
+
+使用的也是html2canvas
