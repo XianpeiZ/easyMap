@@ -105,3 +105,7 @@ PNG
 [https://www.jianshu.com/p/8c5f3b4548ea](https://www.jianshu.com/p/8c5f3b4548ea)
 
 使用的也是html2canvas
+
+
+-----
+card的flag -1 代表没有修改，1代表修改， 0代表初始化，也就是前端 新创建的card
