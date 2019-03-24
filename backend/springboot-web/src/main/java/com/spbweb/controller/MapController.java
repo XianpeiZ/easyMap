@@ -81,25 +81,35 @@ public class MapController {
         for(Map card:mapListJson){
 
             if((int)card.get("flag")!=-1) {
-                Storydetail story = new Storydetail();
-                story.setStoryTitle((String)card.get("title"));
-                story.setColorPick((String)card.get("colorPick"));
-                story.setCoodX(Double.valueOf(card.get("x").toString()));
-                story.setCoodY(Double.valueOf(card.get("y").toString()));
-                story.setStoryDescription((String)card.get("des"));
-                //mapName或者mapId需要一个
-                story.setStoryId((int)card.get("i"));
-                story.setMapId(mapId);
-                story.setStoryLastModifiedDate(timestamp);
+                if((int)card.get("id")==0){
+                    Storydetail record = new Storydetail();
+                    record.setStoryTitle((String)card.get("title"));
+                    record.setColorPick((String)card.get("colorPick"));
+                    record.setCoodX(Double.valueOf(card.get("x").toString()));
+                    record.setCoodY(Double.valueOf(card.get("y").toString()));
+                    record.setStoryDescription((String)card.get("des"));
+                    //mapName或者mapId需要一个
+                    record.setMapId(mapId);
+                    record.setStorySetupDate(timestamp);
+                    record.setStoryLastModifiedDate(timestamp);
 
-                //新增card
-                if((int)card.get("flag")==1){
-                    story.setStorySetupDate(timestamp);
-                    storydetailService.insert(story);
-                }
-                //编辑card
-                else if((int)card.get("flag")==0){
-                    storydetailService.updateStoryByStoryId(story);
+                    storydetailService.insert(record);
+                }else {
+                    Storydetail story = new Storydetail();
+                    story.setStoryTitle((String) card.get("title"));
+                    story.setColorPick((String) card.get("colorPick"));
+                    story.setCoodX(Double.valueOf(card.get("x").toString()));
+                    story.setCoodY(Double.valueOf(card.get("y").toString()));
+                    story.setStoryDescription((String) card.get("des"));
+                    //mapName或者mapId需要一个
+                    story.setStoryId((int) card.get("i"));
+                    story.setMapId(mapId);
+                    story.setStoryLastModifiedDate(timestamp);
+
+                    //编辑card
+                    if ((int) card.get("flag") == 1) {
+                        storydetailService.updateStoryByStoryId(story);
+                    }
                 }
 
             }
@@ -129,6 +139,15 @@ public class MapController {
         ArrayList<Mapdetail> res = mapdetailService.findMapByMapOwner(userName);
         return JSON.toJSONString(res);
         
+    }
+
+    @PostMapping("/api/deleteItem")
+    @ResponseBody
+    public  String deleteItem(@RequestParam("storyId") int cardId){
+        if(storydetailService.deleteStoryByStoryId(cardId)==1){
+            return "true";
+        } else
+            return "false";
     }
 
 }

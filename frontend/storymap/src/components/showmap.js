@@ -253,9 +253,10 @@ export default {
     // 这里是对card Item 的增删改查
     deleteItem: function (index) {
       var that = this
-      var deleteId = that.layout1[index].id
+      var storyId = that.layout1[index].id
+      console.log(storyId)
       if (this.layout1.length > 1) {
-        this.$axios.post('/deleteItem', qs.stringify({deleteId}
+        this.$axios.post('/deleteItem', qs.stringify({storyId}
         )).then(function (response) {
           console.log('后台返回的删除信息：')
           console.log(response.data)
