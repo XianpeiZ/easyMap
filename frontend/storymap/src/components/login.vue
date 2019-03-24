@@ -57,6 +57,7 @@
         var that = this 
         var userName = that.userName
         var userPasswd = that.password
+
          this.$axios.post('/getLoginInf', qs.stringify({userName,userPasswd}
       )).then(function (response) {
         // console.log(response.data)
@@ -70,7 +71,6 @@
           
         }
             
-
       // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
         that.$message('登录失败')
