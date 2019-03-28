@@ -15,7 +15,7 @@
               <el-button :plain="true" type="info" @click.native="setIot2"><i
                 class="el-icon-delete el-icon--left"></i>IOT2
               </el-button>
-              <el-button :plain="true" type="info" @click.native="ssetIot2"><i
+              <el-button :plain="true" type="info" @click.native="setIot3"><i
                 class="el-icon-document el-icon--left"></i>IOT3
               </el-button>
               
@@ -25,9 +25,9 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
-        prop="date"
+        prop="data"
         label="时间"
-        width="180">
+        width="190">
       </el-table-column>
       <el-table-column
         prop="name"
@@ -35,7 +35,7 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="Info"
+        prop="info"
         label="传递信号">
       </el-table-column>
     </el-table>
@@ -46,15 +46,15 @@
  
 <script>
 //  import { userLogin } from '../../api/api';
-import echarts from 'echarts'
+// import echarts from 'echarts'
  import qs from 'qs'
   export default {
     data() {
       return {
         tableData: [{
-            date: '',
+            data: '',
             name: '',
-            Info: ''
+            info: ''
           }],
           DevInf:''
       }
@@ -87,31 +87,21 @@ import echarts from 'echarts'
          var iotName = that.DevInf
          this.$axios.post('/getIotInf', qs.stringify({iotName}
       )).then(function (response) {
+          console.log(response.data)
+          that.tableData.length = 0
           for(var i = 0;i <response.data.length;i++)
           {
-            var modelOfMap = {
-                date: '2016-05-02',
-                name: '王小虎',
-                Info: '上海市普陀区金沙江路 1518 弄'
-            }
-            modelOfMap.date = response.data[i].date
-            modelOfMap.name = response.data[i].name
-            modelOfMap.Info = response.data[i].Info
 
-            that.tableData.push(Info)
+            var modelOfMap = {data: '',name: '王小虎',Info: ''}
+            modelOfMap.data = response.data[i].data
+            modelOfMap.name = response.data[i].name
+            modelOfMap.info = response.data[i].info
+
+            that.tableData.push(modelOfMap)
 
           }
-
-        // console.log(response.data)
-        // console.log(typeof(response.data))
-        
-        if(response.data){
-          //  console.log("")
-            that.$router.push({ name: 'maplist', params: { currentUser: userName}})
-        }else{
-          that.$message('用户名或密码错误')
           
-        }
+          console.log(that.tableData)
             
       // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
