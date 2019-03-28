@@ -2,6 +2,7 @@ package com.spbweb.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.spbweb.entity.Iot;
 import com.spbweb.entity.Mapdetail;
 import com.spbweb.entity.Storydetail;
 import com.spbweb.service.MapdetailService;
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -129,6 +134,69 @@ public class MapController {
         ArrayList<Mapdetail> res = mapdetailService.findMapByMapOwner(userName);
         return JSON.toJSONString(res);
         
+    }
+
+    @PostMapping("api/getIotInf")
+    @ResponseBody
+    public Object getIotInf(String iotName)
+    {
+        String filePath1 = "/root/data" + File.separator + "LightSensorDataRecord.txt";
+        String filePath2 = "/root/data" + File.separator + "RotationSensorDataRecord.txt";
+        String filePath3 = "/root/data" + File.separator + "HC_SR04SensorDataRecord.txt";
+        String input;
+        String[] inputSplit;
+        String sensor = "";
+        ArrayList<Iot> list = new ArrayList<>();
+        BufferedReader bufferedReader = null;
+
+        try
+        {
+            switch ( iotName )
+            {
+                case "iot1":
+                {
+                    sensor = "LightSensor";
+                    bufferedReader = new BufferedReader( new FileReader( filePath1 ) );
+                    break;
+                }
+                case "iot2":
+                {
+                    sensor = "RotationSensor";
+                    bufferedReader = new BufferedReader( new FileReader( filePath2 ) );
+                    break;
+                }
+                case "iot3":
+                {
+                    sensor = "LightSensor";
+                    bufferedReader = new BufferedReader( new FileReader( filePath3 ) );
+                    break;
+                }
+            }
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+
+
+        try
+        {
+            while ( bufferedReader.ready() )
+            {
+                input = bufferedReader.readLine();
+                inputSplit = input.split( " : " );
+                Iot iot = new Iot();
+                iot.setName( sensor );
+                iot.setInfo( inputSplit[1] );
+                iot.setData( inputSplit[0] );
+                list.add( iot );
+            }
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+        return JSON.toJSONString( list );
     }
 
 }
