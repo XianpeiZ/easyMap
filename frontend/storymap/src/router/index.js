@@ -24,7 +24,7 @@ const routes = [
     component: maplist
   },
   {
-    path: '/iot',
+    path: '/components/iot',
     name: 'iot',
     component: iot
   }
