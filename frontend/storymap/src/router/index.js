@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import showmap from '../components/showmap.vue'
 import maplist from '../components/maplist.vue'
 import login from '../components/login.vue'
+import iot from '../components/iot.vue'
 // import {dash} from 'views/'
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/components/maplist',
     name: 'maplist',
     component: maplist
+  },
+  {
+    path: '/iot',
+    name: 'iot',
+    component: iot
   }
 
 ]
