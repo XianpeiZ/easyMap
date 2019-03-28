@@ -150,6 +150,7 @@ public class MapController {
     @ResponseBody
     public Object getIotInf(String iotName)
     {
+    	System.out.print(iotName);
         String filePath1 = "/root/data" + File.separator + "LightSensorDataRecord.txt";
         String filePath2 = "/root/data" + File.separator + "RotationSensorDataRecord.txt";
         String filePath3 = "/root/data" + File.separator + "HC_SR04SensorDataRecord.txt";

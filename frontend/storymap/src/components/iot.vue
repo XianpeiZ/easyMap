@@ -62,7 +62,7 @@ import echarts from 'echarts'
     created () {
       
     },
-    computed(){
+    computed:{
       
     },
     methods: {
@@ -82,10 +82,10 @@ import echarts from 'echarts'
 
      
       getDev() {
-         
+         console.log('设备')
          var that = this
          var iotName = that.DevInf
-         this.$axios.post('/getIotInf', qs.stringify({iot}
+         this.$axios.post('/getIotInf', qs.stringify({iotName}
       )).then(function (response) {
           for(var i = 0;i <response.data.length;i++)
           {
