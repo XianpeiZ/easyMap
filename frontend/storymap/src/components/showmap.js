@@ -4,6 +4,8 @@ import Vue from 'vue'
 import qs from 'qs'
 import vueGridLayout from 'vue-grid-layout'
 import headnav from '../layout/head-nav.vue'
+import html2canvas from 'html2canvas'
+// import jsPDF from 'jspdf'
 var GridLayout = vueGridLayout.GridLayout
 var GridItem = vueGridLayout.GridItem
 Vue.prototype.$axios = axios
@@ -11,15 +13,16 @@ Vue.prototype.$axios = axios
 export default {
   data () {
     return {
+      htmlTitle: '页面导出PDF文件名',
       newMapName: '',
       currentItem: '',
       cardWidth: 1,
       cardHight: 3,
       gridColNum: 10,
       sendLayout: [],
-      card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []},
+      card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: [], id: 0},
       layout1: [
-        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: []}
+        {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: [], id: 0}
         // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false, 'type': 'card'},
         // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false, 'type': 'card'},
         // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false, 'type': 'card'},
@@ -122,13 +125,14 @@ export default {
     },
 
     // ————————————————————————————————————————————————————————————————————————————————
-    // MAP的增删改查
+    // MAP的增删改查 以及导出
     // 从后端获取MAP信息
     getBackendMap: function () {
       var that = this
       var mapName = this.map.name
       this.$axios.post('/getBackendMap', qs.stringify({mapName}
       )).then(function (response) {
+        console.log('从后台获取到的card信息：')
         console.log(response.data)
         that.layout1[0].title = response.data[0].storyTitle
         for (var i = 0; i < response.data.length; i++) {
@@ -139,8 +143,10 @@ export default {
           that.layout1[i].title = response.data[i].storyTitle
           that.layout1[i].des = response.data[i].storyDescription
           that.layout1[i].i = response.data[i].storyId
+          that.layout1[i].id = response.data[i].storyId
           that.layout1[i].flag = -1
         }
+        console.log('前台保留下来的信息：')
         console.log(that.layout1)
         // for(var i = 0 ;i <response.data.size())
       // eslint-disable-next-line handle-callback-err
@@ -157,22 +163,26 @@ export default {
     saveMap () {
       // eslint-disable-next-line no-undef
       // eslint-disable-next-line no-array-constructor
-      let tempLay = JSON.stringify(this.layout1)
+      var that = this
+      let tempLay = JSON.stringify(that.layout1)
+      console.log('即将要保存的map：')
       console.log(tempLay)
-      console.log(typeof (tempLay))
+      // console.log(typeof (tempLay))
       let mapName = this.map.name
       console.log(mapName)
       // tempLay = JSON.parse(JSON.stringify(this.layout1))
       this.$axios.post('/saveMap', qs.stringify({tempLay, mapName}
       )).then(function (response) {
-        if (response.data) {
-          // this.$$message(' Map Save successfully')
+        console.log('后台返回的保存信息：')
+        console.log(response.data)
+        if (response.data === 0) {
+          that.$message(' Map Save successfully')
         }
         // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
-        // this.$message('Map Save failedly')
+        // that.$message('Map Save failedly')
       })
-      this.$message('save')
+      // this.$message('save')
     },
 
     deleteMap: function () {
@@ -206,11 +216,58 @@ export default {
       })
     },
 
+    pdfExport: function () {
+      // eslint-disable-next-line no-undef
+      console.log('导出PDF')
+      this.getPdf('storyMap', name)
+    },
+    savecanvas: function () {
+      let canvas = document.querySelector('.canvas')
+      let that = this
+      html2canvas(canvas, {scale: 2, logging: false, useCORS: true}).then(function (canvas) {
+        let type = 'png'
+        let imgData = canvas.toDataURL(type)
+        // 照片格式处理
+        let _fixType = function (type) {
+          type = type.toLowerCase().replace(/jpg/i, 'jpeg')
+          let r = type.match(/png|jpeg|bmp|gif/)[0]
+          return 'image/' + r
+        }
+        imgData = imgData.replace(_fixType(type), 'image/octet-stream')
+        let filename = 'UUSound' + '.' + type
+        that.saveFile(imgData, filename)
+      })
+    },
+    saveFile (data, filename) {
+      // eslint-disable-next-line camelcase
+      let save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a')
+      save_link.href = data
+      save_link.download = filename
+
+      let event = document.createEvent('MouseEvents')
+      event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+      save_link.dispatchEvent(event)
+    },
+
     // ——————————————————————————————————————————————————————————————————————————
     // 这里是对card Item 的增删改查
     deleteItem: function (index) {
+      var that = this
+      var storyId = that.layout1[index].id
+      console.log(storyId)
       if (this.layout1.length > 1) {
-        this.layout1.splice(index, 1)
+        this.$axios.post('/deleteItem', qs.stringify({storyId}
+        )).then(function (response) {
+          console.log('后台返回的删除信息：')
+          console.log(response.data)
+          if (response.data) {
+            that.$message('Card delete successfully')
+            that.layout1.splice(index, 1)
+          }
+          // eslint-disable-next-line handle-callback-err
+        }).catch(function (error) {
+          that.$message('Card delete failed')
+        })
       } else {
         this.$message('Cannot delete When there is only one card')
       }
@@ -362,6 +419,7 @@ export default {
         tempCard.x = x
         tempCard.y = y
         tempCard.i = id
+        tempCard.id = 0
         tempCard.title = ''
         tempCard.des = ''
         tempCard.flag = 0
@@ -385,6 +443,7 @@ export default {
         tempCard.x = x
         tempCard.y = y
         tempCard.i = id
+        tempCard.id = 0
         tempCard.title = ''
         tempCard.des = ''
         tempCard.flag = 0
@@ -408,6 +467,7 @@ export default {
       tempCard.x = x
       tempCard.y = y
       tempCard.i = id
+      tempCard.id = 0
       tempCard.title = ''
       tempCard.des = ''
       tempCard.flag = 0

@@ -1,5 +1,5 @@
 <template>
-  <div class="home"  >
+  <div class="canvas"  ref="canvas"  id = "storyMap">
     <!-- <el-row class="dashcontent">
         <el-col :span="3" class="left-menu">
                          <el-row class="tac">
@@ -24,6 +24,12 @@
               </el-button>
               <el-button :plain="true" type="info" @click.native="saveMap"><i
                 class="el-icon-document el-icon--left"></i>Save
+              </el-button>
+              <el-button :plain="true" type="info" @click.native="savecanvas"><i
+                class="el-icon-tickets el-icon--left"></i>PNG
+              </el-button>
+              <el-button :plain="true" type="info" @click.native="pdfExport"><i
+                class="el-icon-tickets el-icon--left"></i>PDF
               </el-button>
             </div>
           </el-col>
@@ -185,6 +191,64 @@
           </el-dialog>
         </grid-layout>
       </div>
+    
+      <span>1 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>2</span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>3 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>4 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>5</span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>6 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>1 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>1 </span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span>2 </span>
     </div>
     <!-- </el-col> -->
     <!-- </el-row> -->

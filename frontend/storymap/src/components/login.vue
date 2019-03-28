@@ -3,12 +3,15 @@
   <div>
      
     <div class="outer_label">
-      <!-- <img class="inner_label login_logo" src="../../assets/logo.png"> -->
+    
+      <img class="logo" height=150px width=150px  src="../assets/kanban.png" >
+      <span class="slogon" >easyMap</span>
+
     </div>
      <el-form>
     <div class="login_form">
       <input type="text"  class="qxs-ic_user qxs-icon"  placeholder="用户名" v-model="userName">
-      <input type="text"  class="qxs-ic_password qxs-icon"  placeholder="密码" v-model="password">
+      <input type="password"  class="qxs-ic_password qxs-icon"  placeholder="密码" v-model="password">
       <!--<button class="login_btn el-button el-button--primary is-round" type="primary" round>登录</button>-->
       <el-button class="login_btn" @click.native="login" type="primary" round :loading="isBtnLoading">登录</el-button>
       <div style="margin-top: 10px">
@@ -23,7 +26,7 @@
  
 <script>
 //  import { userLogin } from '../../api/api';
- 
+ import qs from 'qs'
   export default {
     data() {
       return {
@@ -54,19 +57,26 @@
           this.$message.error('请输入密码');
           return;
         }
+        var that = this 
+        var userName = that.userName
+        var userPasswd = that.password
 
-        var userName = this.userName
-        var password = this.password
-         this.$axios.post('/getLoginInf', qs.stringify({userName,password}
+         this.$axios.post('/getLoginInf', qs.stringify({userName,userPasswd}
       )).then(function (response) {
-        console.log(response.data)
+        // console.log(response.data)
+        // console.log(typeof(response.data))
         
-        if(response.data)
-            this.$router.push({ name: 'maplist', params: { currentUser: userName}})
-
+        if(response.data){
+          //  console.log("")
+            that.$router.push({ name: 'maplist', params: { currentUser: userName}})
+        }else{
+          that.$message('用户名或密码错误')
+          
+        }
+            
       // eslint-disable-next-line handle-callback-err
       }).catch(function (error) {
-        this.$message('登录失败')
+        that.$message('登录失败')
       })
  
       }
@@ -102,4 +112,9 @@
     background: linear-gradient(to right, #000099 , #2154FA); /* 标准的语法 */
     filter: brightness(1.4);
   }
+
+.slogon{
+  font-size:50px;
+  color:#fff;
+}
 </style>
