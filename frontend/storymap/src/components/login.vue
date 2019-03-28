@@ -3,7 +3,10 @@
   <div>
      
     <div class="outer_label">
-      <!-- <img class="inner_label login_logo" src="../../assets/logo.png"> -->
+    
+      <img class="logo" height=150px width=150px  src="../assets/kanban.png" >
+      <span class="slogon" >easyMap</span>
+
     </div>
      <el-form>
     <div class="login_form">
@@ -109,4 +112,9 @@
     background: linear-gradient(to right, #000099 , #2154FA); /* 标准的语法 */
     filter: brightness(1.4);
   }
+
+.slogon{
+  font-size:50px;
+  color:#fff;
+}
 </style>
