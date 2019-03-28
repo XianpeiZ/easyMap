@@ -145,8 +145,7 @@ public class MapController {
         return JSON.toJSONString(res);
         
     }
-
-<<<<<<< HEAD
+    
     @PostMapping("api/getIotInf")
     @ResponseBody
     public Object getIotInf(String iotName)
@@ -208,7 +207,8 @@ public class MapController {
             e.printStackTrace();
         }
         return JSON.toJSONString( list );
-=======
+    }
+
     @PostMapping("/api/deleteItem")
     @ResponseBody
     public  String deleteItem(@RequestParam("storyId") int cardId){
@@ -216,7 +216,6 @@ public class MapController {
             return "true";
         } else
             return "false";
->>>>>>> f9e088802a8dc0b5ca721030de065863a960dbcf
     }
 
 }
