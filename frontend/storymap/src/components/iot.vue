@@ -15,11 +15,7 @@
               <el-button :plain="true" type="info" @click.native="setIot2"><i
                 class="el-icon-delete el-icon--left"></i>IOT2
               </el-button>
-<<<<<<< HEAD
-              <el-button :plain="true" type="info" @click.native="setIot2"><i
-=======
               <el-button :plain="true" type="info" @click.native="setIot3"><i
->>>>>>> 59761d7fa3c5b2f06ef6d0e1ed21e09ece6e9211
                 class="el-icon-document el-icon--left"></i>IOT3
               </el-button>
               
