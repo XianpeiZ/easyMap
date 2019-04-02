@@ -146,7 +146,7 @@ public class MapController {
         
     }
     
-    @PostMapping("api/getIotInf")
+    @PostMapping("/api/getIotInf")
     @ResponseBody
     public Object getIotInf(String iotName)
     {
@@ -154,11 +154,16 @@ public class MapController {
         String filePath1 = "/root/data" + File.separator + "LightSensorDataRecord.txt";
         String filePath2 = "/root/data" + File.separator + "RotationSensorDataRecord.txt";
         String filePath3 = "/root/data" + File.separator + "HC_SR04SensorDataRecord.txt";
+//        String filePath1 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "LightSensorDataRecord.txt";
+//        String filePath2 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "RotationSensorDataRecord.txt";
+//        String filePath3 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "HC_SR04SensorDataRecord.txt";
         String input;
         String[] inputSplit;
         String sensor = "";
         ArrayList<Iot> list = new ArrayList<>();
         BufferedReader bufferedReader = null;
+        File f1 = new File(filePath1);
+        System.out.println("文件存在："+f1.exists());
 
         try
         {
@@ -178,7 +183,7 @@ public class MapController {
                 }
                 case "iot3":
                 {
-                    sensor = "LightSensor";
+                    sensor = "HC_SR04Sensor";
                     bufferedReader = new BufferedReader( new FileReader( filePath3 ) );
                     break;
                 }
@@ -192,15 +197,27 @@ public class MapController {
 
         try
         {
-            while ( bufferedReader.ready() )
-            {
+            while ( bufferedReader.ready() ) {
                 input = bufferedReader.readLine();
-                inputSplit = input.split( " : " );
-                Iot iot = new Iot();
-                iot.setName( sensor );
-                iot.setInfo( inputSplit[1] );
-                iot.setData( inputSplit[0] );
-                list.add( iot );
+                System.out.println(input);
+                if (input.startsWith("2019")) {
+
+                    inputSplit = input.split(" : ");
+                    Iot iot = new Iot();
+                    iot.setName(sensor);
+                    try {
+                        iot.setInfo(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+
+                        iot.setInfo(" ");
+                    }
+                    try {
+                        iot.setData(inputSplit[0]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        iot.setData(" ");
+                    }
+                    list.add(iot);
+                }
             }
         }
         catch ( IOException e )

@@ -28,7 +28,11 @@ import './style/characters.css'
 // Vue.use(router)
 axios.defaults.baseURL="http://47.100.22.169:8000/api"
 Vue.use(htmlToPdf)
+<<<<<<< HEAD
 // axios.defaults.baseURL="http://localhost:8000/api"
+=======
+//axios.defaults.baseURL="http://localhost:8000/api"
+>>>>>>> 59761d7fa3c5b2f06ef6d0e1ed21e09ece6e9211
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.use(vueGridLayout)
