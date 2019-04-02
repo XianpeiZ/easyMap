@@ -23,26 +23,8 @@ export default {
       card1: {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: [], id: 0},
       layout1: [
         {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': 0, 'type': 'card', 'colorPick': '#ffffff', 'title': '', 'des': '', comments: [], id: 0}
-        // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false, 'type': 'card'},
-        // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false, 'type': 'card'},
-        // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false, 'type': 'card'},
-        // {'x': 0, 'y': 3, 'w': 1, 'h': 3, 'i': 4, 'flag': false, 'type': 'card'},
-        // {'x': 1, 'y': 3, 'w': 1, 'h': 3, 'i': 5, 'flag': false, 'type': 'card'},
-        // {'x': 2, 'y': 3, 'w': 1, 'h': 3, 'i': 6, 'flag': false, 'type': 'card'},
-        // {'x': 3, 'y': 3, 'w': 1, 'h': 3, 'i': 7, 'flag': false, 'type': 'card'}
-        // {'x': 0, 'y': 6, 'w': 100, 'h': 1, 'i': 0, 'flag': false, 'type': 'release'}
-        // {"x":2,"y":6,"w":2,"h":6,"i":"4"},
-        // {"x":4,"y":6,"w":2,"h":6,"i":"5"},黄色：#FAE75C,蓝色：#AED9E9,粉色:#FE8A8B
       ],
       historyLayout1: [
-        // {'x': 0, 'y': 0, 'w': 1, 'h': 3, 'i': 0, 'flag': false},
-        // {'x': 1, 'y': 0, 'w': 1, 'h': 3, 'i': 1, 'flag': false},
-        // {'x': 2, 'y': 0, 'w': 1, 'h': 3, 'i': 2, 'flag': false},
-        // {'x': 3, 'y': 0, 'w': 1, 'h': 3, 'i': 3, 'flag': false},
-        // {'x': 0, 'y': 3, 'w': 1, 'h': 3, 'i': 4, 'flag': false},
-        // {'x': 1, 'y': 3, 'w': 1, 'h': 3, 'i': 5, 'flag': false},
-        // {'x': 2, 'y': 3, 'w': 1, 'h': 3, 'i': 6, 'flag': false},
-        // {'x': 3, 'y': 3, 'w': 1, 'h': 3, 'i': 7, 'flag': false}
       ],
       initLayout: [
       ],
@@ -432,7 +414,7 @@ export default {
         for (i = 0; i < this.layout1.length; i++) {
           if ((this.layout1[i].y <= this.layout1[index].y) && (this.layout1[i].x > this.layout1[index].x)) {
             this.layout1[i].x += 1
-            this.layout1[i].flag = true
+            this.layout1[i].flag = 0
           }
         }
         x = this.layout1[index].x + 1
