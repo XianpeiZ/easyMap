@@ -2,6 +2,7 @@ package com.spbweb.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Mapdetail implements Serializable {
     /**
