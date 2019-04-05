@@ -10,8 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringbootWebApplicationTests
 {
     @Test
-    public void contextLoads() //to be added
+    public void contextLoads()
     {
+        return;
     }
 }
 

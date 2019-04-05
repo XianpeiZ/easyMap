@@ -1,13 +1,10 @@
 package com.spbweb;
 
-import com.spbweb.dao.MapdetailMapper;
 import com.spbweb.dao.StorydetailMapper;
-import com.spbweb.entity.Mapdetail;
 import com.spbweb.entity.Storydetail;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.verification.Times;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -23,6 +20,8 @@ import java.util.Date;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class StoryDetailTests
 {
+
+    String noComment = "no comment";
 
     @Autowired
     private StorydetailMapper storydetailMapper;
@@ -41,7 +40,7 @@ public class StoryDetailTests
         storydetail.setCoodX( 1.0 );
         storydetail.setCoodY( 1.0 );
         storydetail.setColorPick( "RED" );
-        storydetail.setComments( "no comments" );
+        storydetail.setComments( noComment );
 
         int result = storydetailMapper.insert( storydetail );
         Assert.assertEquals( 1 , result );
@@ -66,7 +65,7 @@ public class StoryDetailTests
         storydetail1.setCoodX( 2.0 );
         storydetail1.setCoodY( 2.0 );
         storydetail1.setColorPick( "BLUE" );
-        storydetail1.setComments( "no comments" );
+        storydetail1.setComments( noComment );
         storydetailMapper.insert( storydetail1 );
 
         storydetail2.setMapId( 48 );
@@ -77,7 +76,7 @@ public class StoryDetailTests
         storydetail2.setCoodX( 3.0 );
         storydetail2.setCoodY( 3.0 );
         storydetail2.setColorPick( "YELLOW" );
-        storydetail2.setComments( "no comments" );
+        storydetail2.setComments( noComment );
         storydetailMapper.insert( storydetail2 );
 
         storydetailArrayList2 = storydetailMapper.selectAll( 48 );
@@ -105,7 +104,7 @@ public class StoryDetailTests
         storydetail.setCoodX( 4.0 );
         storydetail.setCoodY( 4.0 );
         storydetail.setColorPick( "GOLDEN" );
-        storydetail.setComments( "no comments" );
+        storydetail.setComments( noComment );
         storydetailMapper.insert( storydetail );
 
         storydetailArrayList = storydetailMapper.selectAll( 48 );
@@ -135,7 +134,7 @@ public class StoryDetailTests
         storydetail1.setCoodX( 5.0 );
         storydetail1.setCoodY( 5.0 );
         storydetail1.setColorPick( "GREEN" );
-        storydetail1.setComments( "no comments" );
+        storydetail1.setComments( noComment );
         storydetailMapper.insert( storydetail1 );
 
         storydetail2.setMapId( 48 );
@@ -177,7 +176,7 @@ public class StoryDetailTests
         storydetail.setCoodX( 5.0 );
         storydetail.setCoodY( 5.0 );
         storydetail.setColorPick( "GREEN" );
-        storydetail.setComments( "no comments" );
+        storydetail.setComments( noComment );
         storydetailMapper.insert( storydetail );
 
         storydetailArrayList1 = storydetailMapper.selectAll( 48 );

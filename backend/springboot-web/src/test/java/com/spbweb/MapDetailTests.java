@@ -20,6 +20,8 @@ import java.util.Date;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MapDetailTests
 {
+    String springbootTest = "springBootTest";
+    String testTransaction = "test transaction";
 
     @Autowired
     private MapdetailMapper mapdetailMapper;
@@ -33,12 +35,11 @@ public class MapDetailTests
 
         mapdetail.setMapId( 1 );
         mapdetail.setMapName( "abc" );
-        mapdetail.setMapOwner( "springbootTest" );
+        mapdetail.setMapOwner( springbootTest );
         mapdetail.setMapSetupDate( timestamp );
-        mapdetail.setMapDescrpt( "test transaction" );
+        mapdetail.setMapDescrpt( testTransaction );
         int result = mapdetailMapper.insert( mapdetail );
 
-//        System.out.println( "insert test result : " + result );
         Assert.assertEquals( 1 , result );
     }
 
@@ -51,15 +52,13 @@ public class MapDetailTests
         Mapdetail getMapdetail;
 
         mapdetail.setMapName( "abc" );
-        mapdetail.setMapOwner( "springbootTest" );
+        mapdetail.setMapOwner( springbootTest );
         mapdetail.setMapSetupDate( timestamp );
-        mapdetail.setMapDescrpt( "test transaction" );
+        mapdetail.setMapDescrpt( testTransaction );
         mapdetailMapper.insert( mapdetail );
 
-        System.out.println( mapdetail.toString() );
         String mapName = "abc";
         getMapdetail = mapdetailMapper.findMapByMapName( mapName );
-        System.out.println( getMapdetail.toString() );
 
         Assert.assertEquals( mapdetail.getMapName() , getMapdetail.getMapName() );
         Assert.assertEquals( mapdetail.getMapOwner() , getMapdetail.getMapOwner() );
@@ -76,22 +75,18 @@ public class MapDetailTests
         Mapdetail mapdetail1 = new Mapdetail();
 
         mapdetail.setMapName( "abc" );
-        mapdetail.setMapOwner( "springbootTest" );
+        mapdetail.setMapOwner( springbootTest );
         mapdetail.setMapSetupDate( timestamp );
-        mapdetail.setMapDescrpt( "test transaction" );
+        mapdetail.setMapDescrpt( testTransaction );
         mapdetailMapper.insert( mapdetail );
 
         mapdetail1.setMapName( "def" );
-        mapdetail1.setMapOwner( "sprintbootTest" );
+        mapdetail1.setMapOwner( springbootTest );
         mapdetail1.setMapSetupDate( timestamp );
-        mapdetail1.setMapDescrpt( "test transaction" );
+        mapdetail1.setMapDescrpt( testTransaction );
         mapdetailMapper.insert( mapdetail1 );
 
         mapdetailArrayList = mapdetailMapper.selectAll();
-//        for ( int i = 0 ; i < mapdetailArrayList.size() ; i++ )
-//        {
-//            System.out.println( mapdetailArrayList.get( i ).toString() );
-//        }
 
         Assert.assertEquals( lastMapDetailArrayList.size() + 2 , mapdetailArrayList.size() );
         Assert.assertEquals( "abc" , mapdetailArrayList.get( mapdetailArrayList.size() - 2 ).getMapName() );
@@ -106,12 +101,11 @@ public class MapDetailTests
         Mapdetail mapdetail = new Mapdetail();
 
         mapdetail.setMapName( "abc" );
-        mapdetail.setMapOwner( "springbootTest" );
+        mapdetail.setMapOwner( springbootTest );
         mapdetail.setMapSetupDate( timestamp );
-        mapdetail.setMapDescrpt( "test transaction" );
+        mapdetail.setMapDescrpt( testTransaction );
         mapdetailMapper.insert( mapdetail );
 
-//        System.out.println( mapdetail.toString() );
         String mapName = "abc";
         int result = mapdetailMapper.deleteMapByMapName( mapName );
 

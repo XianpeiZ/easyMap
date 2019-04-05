@@ -7,6 +7,7 @@ import com.spbweb.entity.Mapdetail;
 import com.spbweb.entity.Storydetail;
 import com.spbweb.service.MapdetailService;
 import com.spbweb.service.StorydetailService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,7 @@ public class MapController {
             this.mapdetailService.insert(mapdetail);
             return "ok";
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         return "something error";
@@ -74,10 +75,7 @@ public class MapController {
     @PostMapping("/api/saveMap")
     @ResponseBody
     public int saveMap(@RequestParam String tempLay, @RequestParam String mapName){
-        System.out.println(tempLay);
-        System.out.println(mapName);
     	Mapdetail m = mapdetailService.findMapByMapName(mapName);
-    	System.out.println(m.getMapId());
         int mapId = m.getMapId();
 
         JSONArray jsonArray = JSON.parseArray(tempLay);
@@ -150,41 +148,68 @@ public class MapController {
     @ResponseBody
     public Object getIotInf(String iotName)
     {
-    	System.out.print(iotName);
-        String filePath1 = "/root/data" + File.separator + "LightSensorDataRecord.txt";
-        String filePath2 = "/root/data" + File.separator + "RotationSensorDataRecord.txt";
-        String filePath3 = "/root/data" + File.separator + "HC_SR04SensorDataRecord.txt";
-//        String filePath1 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "LightSensorDataRecord.txt";
-//        String filePath2 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "RotationSensorDataRecord.txt";
-//        String filePath3 = "C:\\Users\\ZXP\\Desktop\\data" + File.separator + "HC_SR04SensorDataRecord.txt";
+    	String rootData = "/root/data";
+        String filePath1 = rootData + File.separator + "LightSensorDataRecord.txt";
+        String filePath2 = rootData + File.separator + "RotationSensorDataRecord.txt";
+        String filePath3 = rootData + File.separator + "HC_SR04SensorDataRecord.txt";
+
         String input;
         String[] inputSplit;
         String sensor = "";
         ArrayList<Iot> list = new ArrayList<>();
         BufferedReader bufferedReader = null;
-        File f1 = new File(filePath1);
-        System.out.println("文件存在："+f1.exists());
 
         try
         {
             switch ( iotName )
             {
                 case "iot1":
-                {
                     sensor = "LightSensor";
-                    bufferedReader = new BufferedReader( new FileReader( filePath1 ) );
+                    try
+                    {
+                        bufferedReader = new BufferedReader( new FileReader( filePath1 ) );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    finally
+                    {
+                        bufferedReader.close();
+                    }
                     break;
-                }
                 case "iot2":
-                {
                     sensor = "RotationSensor";
-                    bufferedReader = new BufferedReader( new FileReader( filePath2 ) );
+                    try
+                    {
+                        bufferedReader = new BufferedReader( new FileReader( filePath2 ) );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    finally
+                    {
+                        bufferedReader.close();
+                    }
                     break;
-                }
                 case "iot3":
-                {
                     sensor = "HC_SR04Sensor";
-                    bufferedReader = new BufferedReader( new FileReader( filePath3 ) );
+                    try
+                    {
+                        bufferedReader = new BufferedReader( new FileReader( filePath3 ) );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    finally
+                    {
+                        bufferedReader.close();
+                    }
+                    break;
+                default:
+                {
                     break;
                 }
             }
@@ -199,7 +224,6 @@ public class MapController {
         {
             while ( bufferedReader.ready() ) {
                 input = bufferedReader.readLine();
-                System.out.println(input);
                 if (input.startsWith("2019")) {
 
                     inputSplit = input.split(" : ");
@@ -219,6 +243,10 @@ public class MapController {
                     list.add(iot);
                 }
             }
+        }
+        catch ( NullPointerException e )
+        {
+            e.printStackTrace();
         }
         catch ( IOException e )
         {
