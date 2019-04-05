@@ -146,8 +146,7 @@ public class MapController {
     
     @PostMapping("/api/getIotInf")
     @ResponseBody
-    public Object getIotInf(String iotName)
-    {
+    public Object getIotInf(String iotName) throws IOException {
     	String rootData = "/root/data";
         String filePath1 = rootData + File.separator + "LightSensorDataRecord.txt";
         String filePath2 = rootData + File.separator + "RotationSensorDataRecord.txt";
@@ -173,10 +172,7 @@ public class MapController {
                     {
                         e.printStackTrace();
                     }
-                    finally
-                    {
-                        bufferedReader.close();
-                    }
+
                     break;
                 case "iot2":
                     sensor = "RotationSensor";
@@ -188,10 +184,7 @@ public class MapController {
                     {
                         e.printStackTrace();
                     }
-                    finally
-                    {
-                        bufferedReader.close();
-                    }
+
                     break;
                 case "iot3":
                     sensor = "HC_SR04Sensor";
@@ -203,25 +196,14 @@ public class MapController {
                     {
                         e.printStackTrace();
                     }
-                    finally
-                    {
-                        bufferedReader.close();
-                    }
+
                     break;
                 default:
                 {
                     break;
                 }
             }
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-        }
 
-
-        try
-        {
             while ( bufferedReader.ready() ) {
                 input = bufferedReader.readLine();
                 if (input.startsWith("2019")) {
@@ -243,14 +225,15 @@ public class MapController {
                     list.add(iot);
                 }
             }
+
         }
-        catch ( NullPointerException e )
+        catch ( Exception e )
         {
             e.printStackTrace();
         }
-        catch ( IOException e )
+        finally
         {
-            e.printStackTrace();
+            bufferedReader.close();
         }
         return JSON.toJSONString( list );
     }
